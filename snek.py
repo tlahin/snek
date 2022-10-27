@@ -65,15 +65,20 @@ def pause_game():
                     return False
     return True
 
+snek_position = [width / 2 + 200, height / 2]
+snek_body =  [[width / 2 + 200, height / 2],
+              [width / 2 + 190, height / 2],
+              [width / 2 + 180, height / 2],
+              [width / 2 + 170, height / 2]
+              ]
+
 def play():
     
-    paused = False
     dead = False
     cube_size = 25
-    x = width / 2
-    y = height / 2
-    direction = 1
-    clock = pygame.time.Clock()
+    direction = "LEFT"
+    change_direction = direction
+    fps = pygame.time.Clock()
     speed = 10
 
     while not dead:
@@ -84,45 +89,63 @@ def play():
             if event.type == pygame.QUIT:
                 dead = True
             if event.type == pygame.KEYDOWN:
+
                 if event.key == pygame.K_w:
-                    # 1 == up
-                    direction = 1
+                    change_direction = "UP"
+                    print("UP")
+
                 elif event.key == pygame.K_s:
-                    # 2 == down
-                    direction = 2
+                    change_direction == "DOWN"
+                    print("DOWN")
+
                 elif event.key == pygame.K_a:
-                    # 3 == left
-                    direction = 3
+                    change_direction == "LEFT"
+                    print("LEFT")
+
                 elif event.key == pygame.K_d:
-                    # 4 == right
-                    direction = 4
-                if event.key == pygame.K_SPACE:
+                    change_direction == "RIGHT"
+                    print("RIGHT")
+
+                """ if event.key == pygame.K_SPACE:
                     print("PAUSED")
                     if pause_game() == 1:
                         dead = True
-                    print("RESUME")
-                    
-        if direction == 1:
-            y -= cube_size
-        elif direction == 2:
-            y += cube_size
-        elif direction == 3:
-            x -= cube_size
-        elif direction == 4:
-            x += cube_size
+                    print("RESUME") """
 
-        if x < 0:
-            x = width - cube_size
-        elif x >= width:
-            x = 0
-        if y < 0:
-            y = height - cube_size
-        elif y >= height:
-            y = 0
+        if change_direction == "UP" and direction != "DOWN":
+            direction == "UP"
+        if change_direction == "DOWN" and direction != "UP":
+            direction == "DOWN"
+        if change_direction == "LEFT" and direction != "RIGHT":
+            direction == "LEFT"
+        if change_direction == "RIGHT" and direction != "LEFT":
+            direction == "RIGHT"
 
-        pygame.draw.rect(window, cyan, [x, y, cube_size, cube_size])
+        if direction == "UP":
+            snek_position[1] -= cube_size
+        if direction == "DOWN":
+            snek_position[1] += cube_size
+        if direction == "LEFT":
+            snek_position[0] -= cube_size
+        if direction == "RIGHT":
+            snek_position[0] += cube_size
+
+        if snek_position[1] < 0:
+            snek_position[1] = width - cube_size
+        elif snek_position[1] >= width:
+            snek_position[1] = 0
+        if snek_position[0] < 0:
+            snek_position[0] = height - cube_size
+        elif snek_position[0] >= height:
+            snek_position[0] = 0
+
+        snek_body.insert(0, list(snek_position))
+        snek_body.pop()
+
+        for position in snek_body:
+            pygame.draw.rect(window, cyan, pygame.Rect(position[0], position[1], cube_size, cube_size))
         pygame.display.update()
-        clock.tick(speed)
+        fps.tick(speed)
 
 running = True
 start = True
