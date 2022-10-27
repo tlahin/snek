@@ -106,11 +106,11 @@ def play():
                     change_direction == "RIGHT"
                     print("RIGHT")
 
-                """ if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE:
                     print("PAUSED")
                     if pause_game() == 1:
                         dead = True
-                    print("RESUME") """
+                    print("RESUME")
 
         if change_direction == "UP" and direction != "DOWN":
             direction == "UP"
