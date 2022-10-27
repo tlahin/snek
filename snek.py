@@ -39,20 +39,35 @@ class button():
     def draw(self, surface):
         mouse_action = False
         mouse_pos = pygame.mouse.get_pos()
+        surface.blit(self.image, (self.rect.x, self.rect.y))
         if self.rect.collidepoint(mouse_pos):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
                 mouse_action = True
             if pygame.mouse.get_pressed()[0] == 0:
                 self.clicked = False
-            surface.blit(self.image, (self.rect.x, self.rect.y))
             return mouse_action
 
 start_button = button(width / 2 - 150 / 2, height / 2, start_img)
 quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
 
+def pause_game():
+
+    paused = True
+
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    return 1
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    paused = False
+                    return False
+    return True
+
 def play():
     
+    paused = False
     dead = False
     cube_size = 25
     x = width / 2
@@ -72,19 +87,21 @@ def play():
                 if event.key == pygame.K_w:
                     # 1 == up
                     direction = 1
-                    #y -= cube_size
                 elif event.key == pygame.K_s:
                     # 2 == down
                     direction = 2
-                    #y += cube_size
                 elif event.key == pygame.K_a:
                     # 3 == left
                     direction = 3
-                    #x -= cube_size
                 elif event.key == pygame.K_d:
                     # 4 == right
                     direction = 4
-                    #x += cube_size
+                if event.key == pygame.K_SPACE:
+                    print("PAUSED")
+                    if pause_game() == 1:
+                        dead = True
+                    print("RESUME")
+                    
         if direction == 1:
             y -= cube_size
         elif direction == 2:
