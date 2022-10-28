@@ -30,6 +30,7 @@ fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 class button():
+
     def __init__(self, x, y, image):
         self.image = image
         self.rect = self.image.get_rect()
@@ -76,9 +77,9 @@ def play():
     
     dead = False
     cube_size = 25
-    direction = "LEFT"
-    change_direction = direction
     fps = pygame.time.Clock()
+    direction = 'LEFT'
+    change_direction = direction
     speed = 10
 
     while not dead:
@@ -91,20 +92,20 @@ def play():
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_w:
-                    change_direction = "UP"
-                    print("UP")
+                    change_direction = 'UP'
+                    print(change_direction)
 
-                elif event.key == pygame.K_s:
-                    change_direction == "DOWN"
-                    print("DOWN")
+                if event.key == pygame.K_s:
+                    change_direction == 'DOWN'
+                    print(change_direction)
 
-                elif event.key == pygame.K_a:
-                    change_direction == "LEFT"
-                    print("LEFT")
+                if event.key == pygame.K_d:
+                    change_direction == 'LEFT'
+                    print(change_direction)
 
-                elif event.key == pygame.K_d:
-                    change_direction == "RIGHT"
-                    print("RIGHT")
+                if event.key == pygame.K_a:
+                    change_direction == 'RIGHT'
+                    print(change_direction)
 
                 if event.key == pygame.K_SPACE:
                     print("PAUSED")
@@ -112,36 +113,28 @@ def play():
                         dead = True
                     print("RESUME")
 
-        if change_direction == "UP" and direction != "DOWN":
-            direction == "UP"
-        if change_direction == "DOWN" and direction != "UP":
-            direction == "DOWN"
-        if change_direction == "LEFT" and direction != "RIGHT":
-            direction == "LEFT"
-        if change_direction == "RIGHT" and direction != "LEFT":
-            direction == "RIGHT"
-
-        if direction == "UP":
+        #print(direction)
+        if change_direction == 'UP' and direction != 'DOWN':
             snek_position[1] -= cube_size
-        if direction == "DOWN":
+        elif change_direction == 'DOWN' and direction != 'UP':
             snek_position[1] += cube_size
-        if direction == "LEFT":
+        elif change_direction == 'LEFT' and direction != 'RIGHT':
             snek_position[0] -= cube_size
-        if direction == "RIGHT":
+        elif change_direction == 'RIGHT' and direction != 'LEFT':
             snek_position[0] += cube_size
 
-        if snek_position[1] < 0:
-            snek_position[1] = width - cube_size
-        elif snek_position[1] >= width:
-            snek_position[1] = 0
         if snek_position[0] < 0:
-            snek_position[0] = height - cube_size
-        elif snek_position[0] >= height:
+            snek_position[0] = width - cube_size
+        elif snek_position[0] >= width:
             snek_position[0] = 0
+        if snek_position[1] < 0:
+            snek_position[1] = height - cube_size
+        elif snek_position[1] >= height:
+            snek_position[1] = 0
 
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
-
+        
         for position in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(position[0], position[1], cube_size, cube_size))
         pygame.display.update()
