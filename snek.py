@@ -13,6 +13,7 @@ white = (255, 255, 255)
 blue = (0, 128, 255)
 red = (255, 0, 0)
 
+#ikkunan initti
 pygame.display.set_caption("Epic Game")
 height = 800
 width = 1300
@@ -22,14 +23,17 @@ bg_menu.fill(pygame.Color(white))
 bg_play = pygame.Surface((width, height))
 bg_play.fill(pygame.Color(black))
 
+#lataa kuvat ja alustaa kuvat
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
 start_img = pygame.transform.scale(start_img, (150, 50))
 quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
 quit_img = pygame.transform.scale(quit_img, (150, 50))
 
+#2 eri fonttia
 fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
+#nappula class
 class button():
 
     def __init__(self, x, y, image):
@@ -50,9 +54,11 @@ class button():
                 self.clicked = False
             return mouse_action
 
+#main menu nappulat
 start_button = button(width / 2 - 150 / 2, height / 2, start_img)
 quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
 
+#peli piip
 def pause_game():
 
     paused = True
@@ -67,6 +73,7 @@ def pause_game():
                     return False
     return True
 
+#snek
 snek_size = 10
 snek_position = [510, 500]
 snek_body = [
@@ -75,10 +82,12 @@ snek_body = [
                 [530, 500]
             ]
 
+#snek kasvaa
 def grow_tail():
 
     snek_body.append([-10, -10])
 
+#play functio
 def play():
     
     dead = False
@@ -145,17 +154,18 @@ def play():
 
         window.fill(black)
 
-        print("snek_body", snek_body,"snek_position", snek_position)
+        #print("snek_body", snek_body,"snek_position", snek_position)
 
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
 
+        #jos osuu itteensä ni kys
         if snek_position in snek_body[1::]:
             dead = True
 
+        #renderaa snekin
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
-
 
     print("DEAD")
 
