@@ -67,13 +67,11 @@ def pause_game():
     return True
 
 snek_size = 10
-
 snek_body = [
-                [100, 100 / 2],
-                [100 + 10, 100 / 2],
-                [100 + 20, 100 / 2]
+                [510, 500],
+                [520, 500],
+                [530, 500]
             ]
-
 snek_position = snek_body[0]
 
 def grow_tail():
@@ -90,6 +88,7 @@ def play():
 
     while not dead:
         
+        #Kattoo inputteja
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 dead = True
@@ -111,6 +110,7 @@ def play():
                     print("GROW")
                     grow_tail()
 
+        #Estää vaihtamasta suuntaa 180 astetta
         if change_to == 'UP' and direction != 'DOWN':
             direction = 'UP'
         if change_to == 'DOWN' and direction != 'UP':
@@ -120,6 +120,7 @@ def play():
         if change_to == 'RIGHT' and direction != 'LEFT':
             direction = 'RIGHT'
 
+        #Liikuttaa snekkiä x suuntaan palikan verran
         if direction == 'UP':
             snek_position[1] -= snek_size
         if direction == 'DOWN':
@@ -129,6 +130,7 @@ def play():
         if direction == 'RIGHT':
             snek_position[0] += snek_size
 
+        #Menee seinästä läpi ja tulee toiselta puolelta ulos
         if snek_position[0] < 0:
             snek_position[0] = width - snek_size
         elif snek_position[0] >= width:
@@ -138,18 +140,19 @@ def play():
         elif snek_position[1] >= height:
             snek_position[1] = 0
 
-        snek_body.insert(0, list(snek_position))
-        snek_body.pop()
         window.fill(black)
 
-        print("body[0]")
+        """ print("snek_pos")
+        print(snek_position)
+
+        print("snek_body_first")
         print(snek_body[0])
 
-        print("body_rest")
-        print(snek_body[0::])
+        print("snek_body_rest")
+        print(snek_body[1::]) """
 
-        for snek_body[0] in snek_body[1::]:
-            dead = True
+        snek_body.insert(0, list(snek_position))
+        snek_body.pop()
 
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
