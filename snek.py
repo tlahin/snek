@@ -1,6 +1,7 @@
 
+
 import pygame
-import random
+#import random
 
 pygame.init()
 
@@ -65,12 +66,19 @@ def pause_game():
                     return False
     return True
 
-snek_position = [width / 2 + 200, height / 2]
-snek_body =  [[width / 2 + 200, height / 2],
-              [width / 2 + 190, height / 2],
-              [width / 2 + 180, height / 2],
-              [width / 2 + 170, height / 2]
-              ]
+snek_size = 10
+
+snek_body = [
+                [100, 100 / 2],
+                [100 + 10, 100 / 2],
+                [100 + 20, 100 / 2]
+            ]
+
+snek_position = snek_body[0]
+
+def grow_tail():
+
+    snek_body.append([-10, -10])
 
 def play():
     
@@ -78,7 +86,7 @@ def play():
     direction = 'LEFT'
     change_to = direction
     fps = pygame.time.Clock()
-    snek_speed = 10
+    snek_speed = 5
 
     while not dead:
         
@@ -96,8 +104,12 @@ def play():
                     change_to = 'RIGHT'
                 if event.key == pygame.K_SPACE:
                     print("PAUSE")
-                    pause_game()
+                    if pause_game() == 1:
+                        dead = True
                     print("RESUME")
+                if event.key == pygame.K_g:
+                    print("GROW")
+                    grow_tail()
 
         if change_to == 'UP' and direction != 'DOWN':
             direction = 'UP'
@@ -109,32 +121,43 @@ def play():
             direction = 'RIGHT'
 
         if direction == 'UP':
-            snek_position[1] -= 10
+            snek_position[1] -= snek_size
         if direction == 'DOWN':
-            snek_position[1] += 10
+            snek_position[1] += snek_size
         if direction == 'LEFT':
-            snek_position[0] -= 10
+            snek_position[0] -= snek_size
         if direction == 'RIGHT':
-            snek_position[0] += 10
+            snek_position[0] += snek_size
 
         if snek_position[0] < 0:
-            snek_position[0] = width - 10
+            snek_position[0] = width - snek_size
         elif snek_position[0] >= width:
             snek_position[0] = 0
         if snek_position[1] < 0:
-            snek_position[1] = height - 10
+            snek_position[1] = height - snek_size
         elif snek_position[1] >= height:
             snek_position[1] = 0
 
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
         window.fill(black)
-        
+
+        print("body[0]")
+        print(snek_body[0])
+
+        print("body_rest")
+        print(snek_body[0::])
+
+        for snek_body[0] in snek_body[1::]:
+            dead = True
+
         for pos in snek_body:
-            pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], 10, 10))
+            pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
         pygame.display.update()
         fps.tick(snek_speed)
+
+    print("DEAD")
 
 running = True
 start = True
