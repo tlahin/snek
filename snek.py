@@ -1,5 +1,6 @@
 
 
+from operator import truediv
 import pygame
 #import random
 
@@ -72,7 +73,7 @@ snek_body = [
                 [520, 500],
                 [530, 500]
             ]
-snek_position = snek_body[0]
+snek_position = [510, 500]
 
 def grow_tail():
 
@@ -87,6 +88,8 @@ def play():
     snek_speed = 5
 
     while not dead:
+        fps.tick(snek_speed)
+        pygame.display.update()
         
         #Kattoo inputteja
         for event in pygame.event.get():
@@ -142,25 +145,17 @@ def play():
 
         window.fill(black)
 
-        print("snek_pos")
-        print(snek_position)
-
-        print("snek_body_first")
-        print(snek_body[0])
-
-        print("snek_body_rest")
-        print(snek_body[1::])
+        print("snek_body", snek_body,"snek_position", snek_position)
 
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
 
-        #todo jos törmää itseensä ni dead = True
+        if snek_position in snek_body[1::]:
+            dead = True
 
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
-        pygame.display.update()
-        fps.tick(snek_speed)
 
     print("DEAD")
 
