@@ -142,17 +142,19 @@ def play():
 
         window.fill(black)
 
-        """ print("snek_pos")
+        print("snek_pos")
         print(snek_position)
 
         print("snek_body_first")
         print(snek_body[0])
 
         print("snek_body_rest")
-        print(snek_body[1::]) """
+        print(snek_body[1::])
 
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
+
+        #todo jos törmää itseensä ni dead = True
 
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
