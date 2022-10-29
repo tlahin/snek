@@ -68,12 +68,12 @@ def pause_game():
     return True
 
 snek_size = 10
+snek_position = [510, 500]
 snek_body = [
                 [510, 500],
                 [520, 500],
                 [530, 500]
             ]
-snek_position = [510, 500]
 
 def grow_tail():
 
