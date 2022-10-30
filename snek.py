@@ -1,8 +1,5 @@
 
-
-from operator import truediv
 import pygame
-#import random
 
 pygame.init()
 
@@ -13,7 +10,7 @@ white = (255, 255, 255)
 blue = (0, 128, 255)
 red = (255, 0, 0)
 
-#ikkunan initti
+#window init
 pygame.display.set_caption("Epic Game")
 height = 800
 width = 1300
@@ -23,17 +20,17 @@ bg_menu.fill(pygame.Color(white))
 bg_play = pygame.Surface((width, height))
 bg_play.fill(pygame.Color(black))
 
-#lataa kuvat ja alustaa kuvat
+#loads the pictures and inits them
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
 start_img = pygame.transform.scale(start_img, (150, 50))
 quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
 quit_img = pygame.transform.scale(quit_img, (150, 50))
 
-#2 eri fonttia
+#2 different fronts
 fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
-#nappula class
+#Button class
 class button():
 
     def __init__(self, x, y, image):
@@ -54,11 +51,11 @@ class button():
                 self.clicked = False
             return mouse_action
 
-#main menu nappulat
+#Main menu buttons
 start_button = button(width / 2 - 150 / 2, height / 2, start_img)
 quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
 
-#peli piip
+#pause function
 def pause_game():
 
     paused = True
@@ -73,7 +70,7 @@ def pause_game():
                     return False
     return True
 
-#snek
+#snek stats
 snek_size = 10
 snek_position = [510, 500]
 snek_body = [
@@ -82,12 +79,12 @@ snek_body = [
                 [530, 500]
             ]
 
-#snek kasvaa
+#snek grows
 def grow_tail():
 
     snek_body.append([-10, -10])
 
-#play functio
+#play function
 def play():
     
     dead = False
@@ -100,7 +97,7 @@ def play():
         fps.tick(snek_speed)
         pygame.display.update()
         
-        #Kattoo inputteja
+        #Gets the inputs such as key strokes
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 dead = True
@@ -122,7 +119,7 @@ def play():
                     print("GROW")
                     grow_tail()
 
-        #Estää vaihtamasta suuntaa 180 astetta
+        #Prevents the snek from going backwards
         if change_to == 'UP' and direction != 'DOWN':
             direction = 'UP'
         if change_to == 'DOWN' and direction != 'UP':
@@ -132,7 +129,7 @@ def play():
         if change_to == 'RIGHT' and direction != 'LEFT':
             direction = 'RIGHT'
 
-        #Liikuttaa snekkiä x suuntaan palikan verran
+        #Moves the snek to the direction
         if direction == 'UP':
             snek_position[1] -= snek_size
         if direction == 'DOWN':
@@ -142,7 +139,7 @@ def play():
         if direction == 'RIGHT':
             snek_position[0] += snek_size
 
-        #Menee seinästä läpi ja tulee toiselta puolelta ulos
+        #Checks if snek hits a wall and makes it come out the otherside
         if snek_position[0] < 0:
             snek_position[0] = width - snek_size
         elif snek_position[0] >= width:
@@ -159,11 +156,11 @@ def play():
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
 
-        #jos osuu itteensä ni kys
+        #if snek collides with itself, game ends
         if snek_position in snek_body[1::]:
             dead = True
 
-        #renderaa snekin
+        #Renders the snek
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
