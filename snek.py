@@ -1,5 +1,6 @@
 
 import pygame
+import random
 
 pygame.init()
 
@@ -9,6 +10,7 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 blue = (0, 128, 255)
 red = (255, 0, 0)
+pink = (249, 173, 159)
 
 #window init
 pygame.display.set_caption("Epic Game")
@@ -79,36 +81,46 @@ snek_body = [
                 [530, 500]
             ]
 
-#snek grows
+#snek grows by one block
 def grow_tail():
 
     snek_body.append([-10, -10])
+    print("GROWS")
 
 #play function
 def play():
     
+    #ARE WE ALIVE OR NOT?!
     dead = False
+    
+    #direction variables
     direction = 'LEFT'
     change_to = direction
+    
+    #speed and update speed
     fps = pygame.time.Clock()
     snek_speed = 5
+    
+    #snek food variables
+    snack_spawned = False
 
     while not dead:
+
         fps.tick(snek_speed)
         pygame.display.update()
-        
+
         #Gets the inputs such as key strokes
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 dead = True
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
                     change_to = 'UP'
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     change_to = 'DOWN'
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     change_to = 'LEFT'
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                     change_to = 'RIGHT'
                 if event.key == pygame.K_SPACE:
                     print("PAUSE")
@@ -156,6 +168,15 @@ def play():
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
 
+        #if snek collides with snack_pos it grows
+        if snack_spawned == False:
+            snack_pos = [random.randint(0, width / 100) * 100, random.randint(0, height / 100) * 100]
+            snack_spawned = True
+
+        if snek_position == snack_pos:
+            grow_tail()
+            snack_spawned = False
+
         #if snek collides with itself, game ends
         if snek_position in snek_body[1::]:
             dead = True
@@ -163,6 +184,8 @@ def play():
         #Renders the snek
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
+
+        pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_size, snek_size))
 
     print("DEAD")
 
