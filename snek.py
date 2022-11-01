@@ -190,9 +190,9 @@ def play():
         #background back
         window.fill(black)
 
-        #print("snek_body", snek_body,"snek_position", snek_position)
-
+        #Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
         snek_body.insert(0, list(snek_position))
+        #removes the last element of the list
         snek_body.pop()
 
         #Checks if theres an active food if not generates a new one within the window
