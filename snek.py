@@ -8,6 +8,8 @@ todo:
     Score?
     AI to play the game itself?
 
+    WHEN KYS DO END SCREEN
+
 authors:
     tlahin
     Poks
