@@ -15,6 +15,12 @@ authors:
 Started: 
     Oct 26, 2022
 
+Controls: 
+    Move: 
+        'wasd' or arrow keys
+    Pause/unpause:
+        'space'
+
 """
 
 import pygame
@@ -82,6 +88,7 @@ def pause_game():
 
     while paused:
         for event in pygame.event.get():
+            #if you exit the window during pause function it returns '1'
             if event.type == pygame.QUIT:
                     return 1
             if event.type == pygame.KEYDOWN:
@@ -145,6 +152,7 @@ def play():
                     if pause_game() == 1:
                         dead = True
                     print("RESUME")
+                #debug functionality | grows the snake when pressing 'g'
                 if event.key == pygame.K_g:
                     print("GROW")
                     grow_tail()
