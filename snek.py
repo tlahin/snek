@@ -198,7 +198,6 @@ def play():
         #Checks if theres an active food if not generates a new one within the window
         if snack_spawned == False:
             snack_pos = [random.randint(0, width / 10 - 10) * 10, random.randint(0, height / 10 - 10) * 10]
-            print(snack_pos)
             snack_spawned = True
 
         #Checks if snek collides with the food, if so it consumes it and grows
