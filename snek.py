@@ -87,7 +87,7 @@ def grow_tail():
     snek_body.append([-10, -10])
     print("GROWS")
 
-#play function
+#game loop
 def play():
     
     #ARE WE ALIVE OR NOT?!
@@ -161,6 +161,7 @@ def play():
         elif snek_position[1] >= height:
             snek_position[1] = 0
 
+        #background back
         window.fill(black)
 
         #print("snek_body", snek_body,"snek_position", snek_position)
@@ -168,11 +169,12 @@ def play():
         snek_body.insert(0, list(snek_position))
         snek_body.pop()
 
-        #if snek collides with snack_pos it grows
+        #Checks if theres an active food if not generates a new one within the window
         if snack_spawned == False:
             snack_pos = [random.randint(0, width / 100) * 100, random.randint(0, height / 100) * 100]
             snack_spawned = True
 
+        #Checks if snek collides with the food, if so it consumes it and grows
         if snek_position == snack_pos:
             grow_tail()
             snack_spawned = False
@@ -194,20 +196,25 @@ start = True
 
 print("RUNNING")
 
+#menu loop
 while running:
 
+    #menu background
     window.blit(bg_menu, (0, 0))
 
+    #writes menu text on the screen
     menu = fontbig.render('Main Menu' , True , (black))
     window.blit(menu, (width / 2 - 200, height / 2 - 200))
 
+    #start button rendering
     if start_button.draw(window):
         print("START")
         play()
+    #quit button rendering
     if quit_button.draw(window):
         print("QUIT")
         pygame.quit()
-
+    #close the window exits the game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             print("EXIT")
