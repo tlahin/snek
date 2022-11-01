@@ -1,3 +1,21 @@
+"""
+
+SNAKE GAME PROJECT
+
+todo:
+    Add walls the snake has to avoid or else it dies
+    Options/Settings? colours, speed, screen size etc...
+    Score?
+    AI to play the game itself?
+
+authors:
+    tlahin
+    Poks
+
+Started: 
+    Oct 26, 2022
+
+"""
 
 import pygame
 import random
