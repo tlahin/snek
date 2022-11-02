@@ -57,8 +57,8 @@ bg_play.fill(pygame.Color(black))
 #loads the pictures and scales them correctly
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
 start_img = pygame.transform.scale(start_img, (150, 50))
-""" options_img = pygame.image.lad("./resources/options_button.png").convert_alpha()
-options_img = pygame.transform.scale(options_img, (150, 50)) """
+options_img = pygame.image.load("./resources/options_button.png").convert_alpha()
+options_img = pygame.transform.scale(options_img, (150, 50))
 quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
 quit_img = pygame.transform.scale(quit_img, (150, 50))
 
@@ -90,8 +90,8 @@ class button():
 
 #Main menu buttons
 start_button = button(width / 2 - 150 / 2, height / 2, start_img)
-""" options_button = button(width / 2 - 150 / 2, height / 2 + 55, options_img) """
-quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
+options_button = button(width / 2 - 150 / 2, height / 2 + 55, options_img)
+quit_button = button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
 
 #pause function, pauses the game loop and only returns if you press space to unpause it or quits the game by closing the window
 def pause_game():
@@ -251,6 +251,9 @@ while running:
     if start_button.draw(window):
         print("START")
         play()
+    #options button rendering
+    if options_button.draw(window):
+        print("OPTIONS")
     #quit button rendering
     if quit_button.draw(window):
         print("QUIT")
