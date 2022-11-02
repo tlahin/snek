@@ -45,6 +45,7 @@ pink = (249, 173, 159)
 
 #window init
 pygame.display.set_caption("Epic Game")
+#window size
 height = 800
 width = 1300
 window = pygame.display.set_mode((width, height))
@@ -53,7 +54,7 @@ bg_menu.fill(pygame.Color(white))
 bg_play = pygame.Surface((width, height))
 bg_play.fill(pygame.Color(black))
 
-#loads the pictures and inits them
+#loads the pictures and scales them correctly
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
 start_img = pygame.transform.scale(start_img, (150, 50))
 """ options_img = pygame.image.lad("./resources/options_button.png").convert_alpha()
@@ -65,7 +66,7 @@ quit_img = pygame.transform.scale(quit_img, (150, 50))
 fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
-#Button class
+#Button class to create the main menu buttons
 class button():
 
     def __init__(self, x, y, image):
@@ -74,6 +75,7 @@ class button():
         self.rect.topleft = (x, y)
         self.clicked = False
 
+	#checks for a event where you click the button and also renders it
     def draw(self, surface):
         mouse_action = False
         mouse_pos = pygame.mouse.get_pos()
@@ -91,7 +93,7 @@ start_button = button(width / 2 - 150 / 2, height / 2, start_img)
 """ options_button = button(width / 2 - 150 / 2, height / 2 + 55, options_img) """
 quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
 
-#pause function
+#pause function, pauses the game loop and only returns if you press space to unpause it or quits the game by closing the window
 def pause_game():
 
     paused = True
@@ -107,9 +109,11 @@ def pause_game():
                     return False
     return True
 
-#snek stats
+#'block' size of a singular element
 snek_size = 10
+#head starting position
 snek_position = [510, 500]
+#sneks starting body
 snek_body = [
                 [510, 500],
                 [520, 500],
@@ -223,6 +227,7 @@ def play():
         for pos in snek_body:
             pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
+		#renders the snacks
         pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_size, snek_size))
 
     print("DEAD")
@@ -238,7 +243,7 @@ while running:
     #menu background
     window.blit(bg_menu, (0, 0))
 
-    #writes menu text on the screen
+    #writes menu text on the screen using the bigfont variable
     menu = fontbig.render('Main Menu' , True , (black))
     window.blit(menu, (width / 2 - 200, height / 2 - 200))
 
