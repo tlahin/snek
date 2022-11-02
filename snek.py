@@ -2,7 +2,12 @@
 
 SNAKE GAME PROJECT
 
+working on:
+
+	options button and its features
+
 todo:
+
     Add walls the snake has to avoid or else it dies
     Options/Settings? colours, speed, screen size etc...
     Score?
@@ -14,11 +19,11 @@ authors:
     tlahin
     Poks
 
-Started: 
+Started:
     Oct 26, 2022
 
-Controls: 
-    Move: 
+Controls:
+    Move:
         'wasd' or arrow keys
     Pause/unpause:
         'space'
@@ -51,6 +56,8 @@ bg_play.fill(pygame.Color(black))
 #loads the pictures and inits them
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
 start_img = pygame.transform.scale(start_img, (150, 50))
+""" options_img = pygame.image.lad("./resources/options_button.png").convert_alpha()
+options_img = pygame.transform.scale(options_img, (150, 50)) """
 quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
 quit_img = pygame.transform.scale(quit_img, (150, 50))
 
@@ -81,6 +88,7 @@ class button():
 
 #Main menu buttons
 start_button = button(width / 2 - 150 / 2, height / 2, start_img)
+""" options_button = button(width / 2 - 150 / 2, height / 2 + 55, options_img) """
 quit_button = button(width / 2 - 150 / 2, height / 2 + 55, quit_img)
 
 #pause function
@@ -116,18 +124,18 @@ def grow_tail():
 
 #game loop
 def play():
-    
+
     #ARE WE ALIVE OR NOT?!
     dead = False
-    
+
     #direction variables
     direction = 'LEFT'
     change_to = direction
-    
+
     #speed and update speed
     fps = pygame.time.Clock()
     snek_speed = 5
-    
+
     #snek food variables
     snack_spawned = False
 
@@ -247,5 +255,5 @@ while running:
         if event.type == pygame.QUIT:
             print("EXIT")
             running = False
-    
+
     pygame.display.flip()
