@@ -202,7 +202,7 @@ def play():
 
         #Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
         snek_body.insert(0, list(snek_position))
-        #removes the last element of the list
+        #removes the last element of the list aka the old position
         snek_body.pop()
 
         #Checks if theres an active food if not generates a new one within the window
@@ -215,7 +215,7 @@ def play():
             grow_tail()
             snack_spawned = False
 
-        #if snek collides with itself, game ends
+        #if sneks position aka the head collides with the rest of the body itself, the game ends
         if snek_position in snek_body[1::]:
             dead = True
 
