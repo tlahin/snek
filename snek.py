@@ -67,6 +67,7 @@ fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 #Button class to create buttons with images
+# pos = (x, y)
 class image_button():
 
     def __init__(self, x, y, image):
@@ -91,6 +92,8 @@ class image_button():
             return mouse_action
 
 #Button class to create buttons with plain colours
+# pos = (x, y)
+# size = (width, heigh)
 class colour_button():
 
 	def __init__(self, x, y, width, heigh, colour):
@@ -104,7 +107,6 @@ class colour_button():
 
 		mouse_action = False
 		mouse_pos = pygame.mouse.get_pos()
-		#surface.blit(self.colour, (self.rect.x, self.rect.y))
 		pygame.draw.rect(window, self.colour, self.rect)
 		if self.rect.collidepoint(mouse_pos):
 			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
