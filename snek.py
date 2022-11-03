@@ -49,8 +49,10 @@ pygame.display.set_caption("Epic Game")
 height = 800
 width = 1300
 window = pygame.display.set_mode((width, height))
-bg_menu = pygame.Surface((width, height))
-bg_menu.fill(pygame.Color(white))
+bg_main_menu = pygame.Surface((width, height))
+bg_main_menu.fill(pygame.Color(white))
+bg_options_menu = pygame.Surface((width, height))
+bg_options_menu.fill(pygame.Color(white))
 
 #loads the pictures and scales them correctly
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
@@ -64,10 +66,11 @@ quit_img = pygame.transform.scale(quit_img, (150, 50))
 fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
-#Button class to create the main menu buttons
-class button():
+#Button class to create buttons with images
+class image_button():
 
     def __init__(self, x, y, image):
+
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
@@ -75,6 +78,7 @@ class button():
 
 	#checks for a event where you click the button and also renders it
     def draw(self, surface):
+
         mouse_action = False
         mouse_pos = pygame.mouse.get_pos()
         surface.blit(self.image, (self.rect.x, self.rect.y))
@@ -86,10 +90,38 @@ class button():
                 self.clicked = False
             return mouse_action
 
-#Main menu buttons
-start_button = button(width / 2 - 150 / 2, height / 2, start_img)
-options_button = button(width / 2 - 150 / 2, height / 2 + 55, options_img)
-quit_button = button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
+#Button class to create buttons with plain colours
+class colour_button():
+
+	def __init__(self, x, y, width, heigh, colour):
+
+		self.rect = pygame.Rect((x, y), (width, heigh))
+		self.colour = colour
+		self.clicked = False
+
+	#checks for a event where you click the button and also renders it
+	def draw(self, surface):
+
+		mouse_action = False
+		mouse_pos = pygame.mouse.get_pos()
+		#surface.blit(self.colour, (self.rect.x, self.rect.y))
+		pygame.draw.rect(window, self.colour, self.rect)
+		if self.rect.collidepoint(mouse_pos):
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				self.clicked = True
+				mouse_action = True
+			if pygame.mouse.get_pressed()[0] == 0:
+				self.clicked = False
+			return mouse_action
+
+#Main menu buttons with images
+start_button = image_button(width / 2 - 150 / 2, height / 2, start_img)
+options_button = image_button(width / 2 - 150 / 2, height / 2 + 55, options_img)
+quit_button = image_button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
+
+#optons menu buttons with colours
+white_button = colour_button(50, 50, 100, 100, red)
+black_button = colour_button(50, 160, 100, 100, blue)
 
 #pause function, pauses the game loop and only returns if you press space to unpause it or quits the game by closing the window
 def pause_game():
@@ -234,21 +266,30 @@ def play():
 def options():
 
 	looping = True
+	colour = black
 
 	while looping:
 
-		#background colour
-		window.fill(black)
+		pygame.display.update()
 
-		#options menu text
+		#background colour
+		window.fill(colour)
+
+		#options menu title
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
+		#colour buttons
+		if white_button.draw(window):
+			print("PRESSED_1")
+			colour = white
+		if black_button.draw(window):
+			print("PRESSED_2")
+			colour = black
+		#closes the options menu and goes back to mainm menu
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				looping = False
-
-		pygame.display.update()
 
 running = True
 start = True
@@ -259,7 +300,7 @@ print("RUNNING")
 while running:
 
 	#menu background
-	window.blit(bg_menu, (0, 0))
+	window.blit(bg_main_menu, (0, 0))
 
 	#writes menu text on the screen using the bigfont variable
 	main_menu = fontbig.render('Main Menu' , True , (cyan))
