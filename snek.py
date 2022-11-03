@@ -149,6 +149,8 @@ settings = [
 	cyan,
 	black
 ]
+#speed
+snek_speed = 10
 #'block' size of a singular element
 snek_size = 10
 #head starting position
@@ -178,7 +180,6 @@ def play():
 
 	#speed and update speed
 	fps = pygame.time.Clock()
-	snek_speed = 5
 
 	#snek food variables
 	snack_spawned = False
