@@ -141,6 +141,9 @@ def pause_game():
                     return False
     return True
 
+#settings for the gameloop
+#0. snek colour
+#1. game background colour
 settings = [
 	cyan,
 	black
