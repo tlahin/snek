@@ -9,25 +9,25 @@ working on:
 
 todo:
 
-    Add walls the snake has to avoid or else it dies
-    Options/Settings? colours, speed, screen size etc...
-    Score?
-    AI to play the game itself?
+	Add walls the snake has to avoid or else it dies
+	Options/Settings? colours, speed, screen size etc...
+	Score?
+	AI to play the game itself?
 
-    WHEN KYS DO END SCREEN
+	WHEN KYS DO END SCREEN
 
 authors:
-    tlahin
-    Poks
+	tlahin
+	Poks
 
 Started:
-    Oct 26, 2022
+	Oct 26, 2022
 
 Controls:
-    Move:
-        'wasd' or arrow keys
-    Pause/unpause:
-        'space'
+	Move:
+		'wasd' or arrow keys
+	Pause/unpause:
+		'space'
 
 """
 
@@ -71,26 +71,26 @@ fontbig = pygame.font.SysFont('Arial', 80)
 # pos = (x, y)
 class image_button():
 
-    def __init__(self, x, y, image):
+	def __init__(self, x, y, image):
 
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
-        self.clicked = False
+		self.image = image
+		self.rect = self.image.get_rect()
+		self.rect.topleft = (x, y)
+		self.clicked = False
 
 	#checks for a event where you click the button and also renders it
-    def draw(self, surface):
+	def draw(self, surface):
 
-        mouse_action = False
-        mouse_pos = pygame.mouse.get_pos()
-        surface.blit(self.image, (self.rect.x, self.rect.y))
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                mouse_action = True
-            if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
-            return mouse_action
+		mouse_action = False
+		mouse_pos = pygame.mouse.get_pos()
+		surface.blit(self.image, (self.rect.x, self.rect.y))
+		if self.rect.collidepoint(mouse_pos):
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				self.clicked = True
+				mouse_action = True
+			if pygame.mouse.get_pressed()[0] == 0:
+				self.clicked = False
+			return mouse_action
 
 #Button class to create buttons with plain colours
 # pos = (x, y)
@@ -129,18 +129,18 @@ blue_button = colour_button(50, 160, 100, 100, blue)
 #pause function, pauses the game loop and only returns if you press space to unpause it or quits the game by closing the window
 def pause_game():
 
-    paused = True
+	paused = True
 
-    while paused:
-        for event in pygame.event.get():
-            #if you exit the window during pause function it returns '1'
-            if event.type == pygame.QUIT:
-                    return 1
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    paused = False
-                    return False
-    return True
+	while paused:
+		for event in pygame.event.get():
+			#if you exit the window during pause function it returns '1'
+			if event.type == pygame.QUIT:
+					return 1
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					paused = False
+					return False
+	return True
 
 #settings for the gameloop
 #0. snek colour
@@ -155,122 +155,122 @@ snek_size = 10
 snek_position = [510, 500]
 #sneks starting body
 snek_body = [
-                [510, 500],
-                [520, 500],
-                [530, 500]
-            ]
+				[510, 500],
+				[520, 500],
+				[530, 500]
+			]
 
 #snek grows by one block
 def grow_tail():
 
-    snek_body.append([-10, -10])
-    print("GROWS")
+	snek_body.append([-10, -10])
+	print("GROWS")
 
 #game loop
 def play():
 
-    #ARE WE ALIVE OR NOT?!
-    dead = False
+	#ARE WE ALIVE OR NOT?!
+	dead = False
 
-    #direction variables
-    direction = 'LEFT'
-    change_to = direction
+	#direction variables
+	direction = 'LEFT'
+	change_to = direction
 
-    #speed and update speed
-    fps = pygame.time.Clock()
-    snek_speed = 5
+	#speed and update speed
+	fps = pygame.time.Clock()
+	snek_speed = 5
 
-    #snek food variables
-    snack_spawned = False
+	#snek food variables
+	snack_spawned = False
 
-    while not dead:
+	while not dead:
 
-        fps.tick(snek_speed)
-        pygame.display.update()
+		fps.tick(snek_speed)
+		pygame.display.update()
 
-        #Gets the inputs such as key strokes
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                dead = True
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w or event.key == pygame.K_UP:
-                    change_to = 'UP'
-                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
-                    change_to = 'DOWN'
-                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                    change_to = 'LEFT'
-                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-                    change_to = 'RIGHT'
-                if event.key == pygame.K_SPACE:
-                    print("PAUSE")
-                    if pause_game() == 1:
-                        dead = True
-                    print("RESUME")
-                #debug functionality | grows the snake when pressing 'g'
-                if event.key == pygame.K_g:
-                    print("GROW")
-                    grow_tail()
+		#Gets the inputs such as key strokes
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				dead = True
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_w or event.key == pygame.K_UP:
+					change_to = 'UP'
+				if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+					change_to = 'DOWN'
+				if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+					change_to = 'LEFT'
+				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+					change_to = 'RIGHT'
+				if event.key == pygame.K_SPACE:
+					print("PAUSE")
+					if pause_game() == 1:
+						dead = True
+					print("RESUME")
+				#debug functionality | grows the snake when pressing 'g'
+				if event.key == pygame.K_g:
+					print("GROW")
+					grow_tail()
 
-        #Prevents the snek from going backwards
-        if change_to == 'UP' and direction != 'DOWN':
-            direction = 'UP'
-        if change_to == 'DOWN' and direction != 'UP':
-            direction = 'DOWN'
-        if change_to == 'LEFT' and direction != 'RIGHT':
-            direction = 'LEFT'
-        if change_to == 'RIGHT' and direction != 'LEFT':
-            direction = 'RIGHT'
+		#Prevents the snek from going backwards
+		if change_to == 'UP' and direction != 'DOWN':
+			direction = 'UP'
+		if change_to == 'DOWN' and direction != 'UP':
+			direction = 'DOWN'
+		if change_to == 'LEFT' and direction != 'RIGHT':
+			direction = 'LEFT'
+		if change_to == 'RIGHT' and direction != 'LEFT':
+			direction = 'RIGHT'
 
-        #Moves the snek to the direction
-        if direction == 'UP':
-            snek_position[1] -= snek_size
-        if direction == 'DOWN':
-            snek_position[1] += snek_size
-        if direction == 'LEFT':
-            snek_position[0] -= snek_size
-        if direction == 'RIGHT':
-            snek_position[0] += snek_size
+		#Moves the snek to the direction
+		if direction == 'UP':
+			snek_position[1] -= snek_size
+		if direction == 'DOWN':
+			snek_position[1] += snek_size
+		if direction == 'LEFT':
+			snek_position[0] -= snek_size
+		if direction == 'RIGHT':
+			snek_position[0] += snek_size
 
-        #Checks if snek hits a wall and makes it come out the otherside
-        if snek_position[0] < 0:
-            snek_position[0] = width - snek_size
-        elif snek_position[0] >= width:
-            snek_position[0] = 0
-        if snek_position[1] < 0:
-            snek_position[1] = height - snek_size
-        elif snek_position[1] >= height:
-            snek_position[1] = 0
+		#Checks if snek hits a wall and makes it come out the otherside
+		if snek_position[0] < 0:
+			snek_position[0] = width - snek_size
+		elif snek_position[0] >= width:
+			snek_position[0] = 0
+		if snek_position[1] < 0:
+			snek_position[1] = height - snek_size
+		elif snek_position[1] >= height:
+			snek_position[1] = 0
 
 		#background back
-        window.fill(settings[1])
+		window.fill(settings[1])
 
-        #Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
-        snek_body.insert(0, list(snek_position))
-        #removes the last element of the list aka the old position
-        snek_body.pop()
+		#Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
+		snek_body.insert(0, list(snek_position))
+		#removes the last element of the list aka the old position
+		snek_body.pop()
 
-        #Checks if theres an active food if not generates a new one within the window
-        if snack_spawned == False:
-            snack_pos = [random.randint(0, width / 10 - 10) * 10, random.randint(0, height / 10 - 10) * 10]
-            snack_spawned = True
+		#Checks if theres an active food if not generates a new one within the window
+		if snack_spawned == False:
+			snack_pos = [random.randint(0, width / 10 - 10) * 10, random.randint(0, height / 10 - 10) * 10]
+			snack_spawned = True
 
-        #Checks if snek collides with the food, if so it consumes it and grows
-        if snek_position == snack_pos:
-            grow_tail()
-            snack_spawned = False
+		#Checks if snek collides with the food, if so it consumes it and grows
+		if snek_position == snack_pos:
+			grow_tail()
+			snack_spawned = False
 
-        #if sneks position aka the head collides with the rest of the body itself, the game ends
-        if snek_position in snek_body[1::]:
-            dead = True
+		#if sneks position aka the head collides with the rest of the body itself, the game ends
+		if snek_position in snek_body[1::]:
+			dead = True
 
-        #Renders the snek
-        for pos in snek_body:
-            pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
+		#Renders the snek
+		for pos in snek_body:
+			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
 		#renders the snacks
-        pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_size, snek_size))
+		pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_size, snek_size))
 
-    print("DEAD")
+	print("DEAD")
 
 #Options menu
 def options(settings):
