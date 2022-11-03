@@ -122,8 +122,8 @@ options_button = image_button(width / 2 - 150 / 2, height / 2 + 55, options_img)
 quit_button = image_button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
 
 #optons menu buttons with colours
-white_button = colour_button(50, 50, 100, 100, red)
-black_button = colour_button(50, 160, 100, 100, blue)
+red_button = colour_button(50, 50, 100, 100, red)
+blue_button = colour_button(50, 160, 100, 100, blue)
 
 #pause function, pauses the game loop and only returns if you press space to unpause it or quits the game by closing the window
 def pause_game():
@@ -141,6 +141,10 @@ def pause_game():
                     return False
     return True
 
+settings = [
+	cyan,
+	black
+]
 #'block' size of a singular element
 snek_size = 10
 #head starting position
@@ -234,7 +238,7 @@ def play():
             snek_position[1] = 0
 
 		#background back
-        window.fill(black)
+        window.fill(settings[1])
 
         #Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
         snek_body.insert(0, list(snek_position))
@@ -257,7 +261,7 @@ def play():
 
         #Renders the snek
         for pos in snek_body:
-            pygame.draw.rect(window, cyan, pygame.Rect(pos[0], pos[1], snek_size, snek_size))
+            pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 
 		#renders the snacks
         pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_size, snek_size))
@@ -265,29 +269,28 @@ def play():
     print("DEAD")
 
 #Options menu
-def options():
+def options(settings):
 
 	looping = True
-	colour = black
 
 	while looping:
 
 		pygame.display.update()
 
 		#background colour
-		window.fill(colour)
+		window.fill(settings[1])
 
 		#options menu title
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
 		#colour buttons
-		if white_button.draw(window):
+		if red_button.draw(window):
 			print("PRESSED_1")
-			colour = white
-		if black_button.draw(window):
+			settings[0] = red
+		if blue_button.draw(window):
 			print("PRESSED_2")
-			colour = black
+			settings[0] = blue
 		#closes the options menu and goes back to mainm menu
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -315,7 +318,7 @@ while running:
 	#options button rendering
 	if options_button.draw(window):
 		print("OPTIONS")
-		options()
+		options(settings)
 	#quit button rendering
 	if quit_button.draw(window):
 		print("QUIT")
