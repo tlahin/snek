@@ -298,7 +298,7 @@ def options(settings):
 			settings[0] = blue
 		#renders the snek to see the colours
 		for pos in snek_body:
-			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
+			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size * 2, snek_size * 2))
 		#closes the options menu and goes back to mainm menu
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
