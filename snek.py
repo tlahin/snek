@@ -36,12 +36,12 @@ import random
 pygame.init()
 
 #colours
-cyan = (51, 255, 255)
-black = (0, 0, 0)
 white = (255, 255, 255)
+black = (0, 0, 0)
+cyan = (50, 255, 255)
+pink = (255, 0, 150)
 blue = (0, 128, 255)
 red = (255, 0, 0)
-pink = (249, 173, 159)
 
 #window init
 pygame.display.set_caption("Epic Game")
@@ -51,8 +51,6 @@ width = 1300
 window = pygame.display.set_mode((width, height))
 bg_menu = pygame.Surface((width, height))
 bg_menu.fill(pygame.Color(white))
-bg_play = pygame.Surface((width, height))
-bg_play.fill(pygame.Color(black))
 
 #loads the pictures and scales them correctly
 start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
@@ -201,7 +199,7 @@ def play():
         elif snek_position[1] >= height:
             snek_position[1] = 0
 
-        #background back
+		#background back
         window.fill(black)
 
         #Sets the 'new' aka moved position to the head of the list making the illusion of a moving snek
@@ -232,6 +230,26 @@ def play():
 
     print("DEAD")
 
+#Options menu
+def options():
+
+	looping = True
+
+	while looping:
+
+		#background colour
+		window.fill(black)
+
+		#options menu text
+		options_menu = fontbig.render('Options' , True , (cyan))
+		window.blit(options_menu, (width / 2 - 150, 25))
+
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				looping = False
+
+		pygame.display.update()
+
 running = True
 start = True
 
@@ -240,28 +258,29 @@ print("RUNNING")
 #menu loop
 while running:
 
-    #menu background
-    window.blit(bg_menu, (0, 0))
+	#menu background
+	window.blit(bg_menu, (0, 0))
 
-    #writes menu text on the screen using the bigfont variable
-    menu = fontbig.render('Main Menu' , True , (black))
-    window.blit(menu, (width / 2 - 200, height / 2 - 200))
+	#writes menu text on the screen using the bigfont variable
+	main_menu = fontbig.render('Main Menu' , True , (cyan))
+	window.blit(main_menu, (width / 2 - 200, height / 2 - 200))
 
-    #start button rendering
-    if start_button.draw(window):
-        print("START")
-        play()
-    #options button rendering
-    if options_button.draw(window):
-        print("OPTIONS")
-    #quit button rendering
-    if quit_button.draw(window):
-        print("QUIT")
-        pygame.quit()
-    #close the window exits the game
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            print("EXIT")
-            running = False
+	#start button rendering
+	if start_button.draw(window):
+		print("START")
+		play()
+	#options button rendering
+	if options_button.draw(window):
+		print("OPTIONS")
+		options()
+	#quit button rendering
+	if quit_button.draw(window):
+		print("QUIT")
+		pygame.quit()
+	#close the window exits the game
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			print("EXIT")
+			running = False
 
-    pygame.display.flip()
+	pygame.display.flip()
