@@ -288,13 +288,15 @@ def options(settings):
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
-		#colour buttons
+		#changes snek colour to red
 		if red_button.draw(window):
 			print("PRESSED_1")
 			settings[0] = red
+		#changes snek colour to blue
 		if blue_button.draw(window):
 			print("PRESSED_2")
 			settings[0] = blue
+		#renders the snek to see the colours
 		for pos in snek_body:
 			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 		#closes the options menu and goes back to mainm menu
