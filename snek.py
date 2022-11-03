@@ -295,6 +295,8 @@ def options(settings):
 		if blue_button.draw(window):
 			print("PRESSED_2")
 			settings[0] = blue
+		for pos in snek_body:
+			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_size, snek_size))
 		#closes the options menu and goes back to mainm menu
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
