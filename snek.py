@@ -97,7 +97,7 @@ class colour_button():
         self.clicked = False
 
 	# Render the button and create a event handler
-    def draw(self, surface):
+    def draw(self, window):
         mouse_action = False
         mouse_pos = pygame.mouse.get_pos()
         pygame.draw.rect(window, self.colour, self.rect)
@@ -109,6 +109,14 @@ class colour_button():
                 self.clicked = False
             return mouse_action
 
+# Settings for the gameloop
+class create_settings():
+
+	def __init__(self, snek_colour, background_colour, food_colour):
+		self.snek_colour = snek_colour
+		self.background_colour = background_colour
+		self.food_colour = food_colour
+
 # Main menu buttons
 start_button = image_button(width / 2 - 150 / 2, height / 2, start_img)
 options_button = image_button(width / 2 - 150 / 2, height / 2 + 55, options_img)
@@ -117,6 +125,9 @@ quit_button = image_button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
 # Options menu buttons
 red_button = colour_button(50, 50, 100, 100, red)
 blue_button = colour_button(50, 160, 100, 100, blue)
+
+# Settings 'struct'
+settings = create_settings(cyan, black, pink)
 
 # Pause game loop until space is pressed
 def pause_game():
@@ -134,13 +145,6 @@ def pause_game():
 					return False
 	return True
 
-# Settings for the gameloop
-#0. Snek colour
-#1. Game background colour
-settings = [
-	cyan,
-	black
-]
 # Initializing snek
 snek_speed = 10
 snek_block_size = 10
@@ -225,7 +229,7 @@ def play():
 			snek_head[1] = 0
 
 		# Set background colour
-		window.fill(settings[1])
+		window.fill(settings.background_colour)
 
 		# Add new snake block in the direction of movement and remove last block
 		snek_body.insert(0, list(snek_head))
@@ -247,35 +251,35 @@ def play():
 
         # Rendering snake and snacks
 		for pos in snek_body:
-			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_block_size, snek_block_size))
+			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_block_size, snek_block_size))
 
-		pygame.draw.rect(window, pink, pygame.Rect(snack_pos[0], snack_pos[1], snek_block_size, snek_block_size))
+		pygame.draw.rect(window, settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_block_size, snek_block_size))
 
 	print("DEAD")
 
 # Options menu
-def options(settings):
+def options():
 
 	looping = True
 
 	while looping:
 		pygame.display.update()
 
-		window.fill(settings[1])
+		window.fill(settings.background_colour)
 
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
 		if red_button.draw(window):
 			print("PRESSED_1")
-			settings[0] = red
+			settings.snek_colour = red
 
 		if blue_button.draw(window):
 			print("PRESSED_2")
-			settings[0] = blue
+			settings.snek_colour = blue
 
 		for pos in snek_body:
-			pygame.draw.rect(window, settings[0], pygame.Rect(pos[0], pos[1], snek_block_size * 2, snek_block_size * 2))
+			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_block_size * 2, snek_block_size * 2))
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -299,7 +303,7 @@ while running:
 
 	if options_button.draw(window):
 		print("OPTIONS")
-		options(settings)
+		options()
         
 	if quit_button.draw(window):
 		print("QUIT")
