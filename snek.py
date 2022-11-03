@@ -34,6 +34,8 @@ Controls:
 import pygame
 import random
 
+from options import *
+
 pygame.init()
 
 # Colours
@@ -43,6 +45,12 @@ cyan = (50, 255, 255)
 pink = (255, 0, 150)
 blue = (0, 128, 255)
 red = (255, 0, 0)
+green = (0, 255, 0)
+yellow = (0, 255, 255)
+COLOR_INACTIVE = (100, 80, 255)
+COLOR_ACTIVE = (100, 200, 255)
+COLOR_LIST_INACTIVE = (255, 100, 100)
+COLOR_LIST_ACTIVE = (255, 150, 150)
 
 # Window init
 pygame.display.set_caption("Epic Game")
@@ -67,67 +75,28 @@ quit_img = pygame.transform.scale(quit_img, (150, 50))
 fontsmall = pygame.font.SysFont('Arial', 50)
 fontbig = pygame.font.SysFont('Arial', 80)
 
-class image_button():
-    """ Create a button using images. """
-    def __init__(self, x, y, image):
-
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
-        self.clicked = False
-
-	# Render the button and create a event handler
-    def draw(self, surface):
-        mouse_action = False
-        mouse_pos = pygame.mouse.get_pos()
-        surface.blit(self.image, (self.rect.x, self.rect.y))
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                mouse_action = True
-            if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
-            return mouse_action
-
-class colour_button():
-    """ Create a button with colours. """
-    def __init__(self, x, y, width, heigh, colour):
-        self.rect = pygame.Rect((x, y), (width, heigh))
-        self.colour = colour
-        self.clicked = False
-
-	# Render the button and create a event handler
-    def draw(self, window):
-        mouse_action = False
-        mouse_pos = pygame.mouse.get_pos()
-        pygame.draw.rect(window, self.colour, self.rect)
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                mouse_action = True
-            if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
-            return mouse_action
-
-# Settings for the gameloop
-class create_settings():
-
-	def __init__(self, snek_colour, background_colour, food_colour):
-		self.snek_colour = snek_colour
-		self.background_colour = background_colour
-		self.food_colour = food_colour
-
 # Main menu buttons
 start_button = image_button(width / 2 - 150 / 2, height / 2, start_img)
 options_button = image_button(width / 2 - 150 / 2, height / 2 + 55, options_img)
 quit_button = image_button(width / 2 - 150 / 2, height / 2 + 110, quit_img)
 
 # Options menu buttons
-red_button = colour_button(50, 50, 100, 100, red)
-blue_button = colour_button(50, 160, 100, 100, blue)
+red_button = colour_button(900, 150, 100, 100, red)
+blue_button = colour_button(1010, 150, 100, 100, blue)
 
 # Settings 'struct'
-settings = create_settings(cyan, black, pink)
+settings = create_settings(cyan, white, pink)
+
+# Initializing snek
+snek_speed = 10
+snek_block_size = 10
+snek_head = [510, 500]
+snek_body = [
+				[510, 500],
+				[520, 500],
+				[530, 500]
+			]
+
 
 # Pause game loop until space is pressed
 def pause_game():
@@ -144,16 +113,6 @@ def pause_game():
 					paused = False
 					return False
 	return True
-
-# Initializing snek
-snek_speed = 10
-snek_block_size = 10
-snek_head = [510, 500]
-snek_body = [
-				[510, 500],
-				[520, 500],
-				[530, 500]
-			]
 
 # Grow snek
 def grow_tail():
@@ -260,15 +219,24 @@ def play():
 # Options menu
 def options():
 
-	looping = True
+	list = DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					50, 150, 200, 50, 
+					pygame.font.SysFont(None, 30), 
+					"Select colour", ["GREEN", "YELLOW"])
+	
+	running = True
 
-	while looping:
+	while running:
+
 		pygame.display.update()
 
 		window.fill(settings.background_colour)
 
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
+
 
 		if red_button.draw(window):
 			print("PRESSED_1")
@@ -279,11 +247,17 @@ def options():
 			settings.snek_colour = blue
 
 		for pos in snek_body:
-			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_block_size * 2, snek_block_size * 2))
+			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0] - 380, pos[1] - 450, snek_block_size * 2, snek_block_size * 2))
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				looping = False
+				running = False
+			previous_event = event
+			if event != previous_event:
+				list.main = event
+		
+		if list.draw(window):
+			print("hello")
 
 running = True
 start = True
