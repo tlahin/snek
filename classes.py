@@ -58,8 +58,6 @@ class create_settings():
 		self.background_colour = background_colour
 		self.food_colour = food_colour
     
-
-
 # Create a button using images.
 class image_button():
 
