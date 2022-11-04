@@ -12,48 +12,43 @@ class DropDown():
         self.draw_menu = False
         self.menu_active = False
         self.active_option = -1
-        self.clicked = False
 
     def draw(self, surface):
-
         pygame.draw.rect(surface, self.color_menu[self.menu_active], self.rect, 0)
-
         msg = self.font.render(self.main, 1, (0, 0, 0))
         surface.blit(msg, msg.get_rect(center = self.rect.center))
-        
-        self.clicked == False
-        mouse_pos = pygame.mouse.get_pos()
-        self.menu_active = self.rect.collidepoint(mouse_pos)
-        
+
         if self.draw_menu:
             for i, text in enumerate(self.options):
                 rect = self.rect.copy()
-                rect.y += (i + 1) * self.rect.height
+                rect.y += (i+1) * self.rect.height
                 pygame.draw.rect(surface, self.color_option[1 if i == self.active_option else 0], rect, 0)
                 msg = self.font.render(text, 1, (0, 0, 0))
                 surface.blit(msg, msg.get_rect(center = rect.center))
 
+    def update(self, event_list):
+        mpos = pygame.mouse.get_pos()
+        self.menu_active = self.rect.collidepoint(mpos)
+        
         self.active_option = -1
         for i in range(len(self.options)):
             rect = self.rect.copy()
-            rect.y += (i + 1) * self.rect.height
-            if rect.collidepoint(mouse_pos):
+            rect.y += (i+1) * self.rect.height
+            if rect.collidepoint(mpos):
                 self.active_option = i
                 break
-            
-        if self.rect.collidepoint(mouse_pos):
-            self.draw_menu = True
 
         if not self.menu_active and self.active_option == -1:
             self.draw_menu = False
 
-        for event in pygame.event.get():
+        for event in event_list:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if self.menu_active:
                     self.draw_menu = not self.draw_menu
                 elif self.draw_menu and self.active_option >= 0:
                     self.draw_menu = False
                     return self.active_option
+        return -1
 
 # Settings for the gameloop
 class create_settings():
@@ -62,6 +57,8 @@ class create_settings():
 		self.snek_colour = snek_colour
 		self.background_colour = background_colour
 		self.food_colour = food_colour
+    
+
 
 # Create a button using images.
 class image_button():
