@@ -72,7 +72,7 @@ quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
 quit_img = pygame.transform.scale(quit_img, (150, 50))
 
 # Fonts
-fontsmall = pygame.font.SysFont('Arial', 50)
+fontsmall = pygame.font.SysFont('Arial', 40)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 # Main menu buttons
@@ -85,7 +85,7 @@ red_button = colour_button(900, 150, 100, 100, red)
 blue_button = colour_button(1010, 150, 100, 100, blue)
 
 # Settings 'struct'
-settings = create_settings(cyan, white, pink)
+settings = create_settings(white, white, pink)
 
 # Initializing snek
 snek_speed = 10
@@ -223,9 +223,23 @@ def options():
 	snek_colour_list = DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
-					50, 150, 200, 50, 
+					50, 350, 200, 50, 
 					pygame.font.SysFont(None, 30), 
-					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
+					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])\
+	
+	food_colour_list = DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					300, 350, 200, 50, 
+					pygame.font.SysFont(None, 30), 
+					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
+
+	background_colour_list = DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					550, 350, 200, 50, 
+					pygame.font.SysFont(None, 30), 
+					"Background colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 	
 	running = True
 
@@ -233,6 +247,7 @@ def options():
 
 		pygame.display.update()
 
+		# Options menu background colour
 		window.fill(black)
 
 		event_list = pygame.event.get()
@@ -244,18 +259,49 @@ def options():
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
-		#renders snek above the dropdown to showcase the colour
-		for pos in snek_body:
-			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0] - 380, pos[1] - 450, snek_block_size * 2, snek_block_size * 2))
+		# Title for snek dropdown menu
+		snek_colour_title = fontsmall.render("Snek", True, (white))
+		window.blit(snek_colour_title, (100, 200))
 
-		#updates the dropdown menu and changes the colour of the snake
-		selected_option = snek_colour_list.update(event_list)
-		if selected_option >= 0:
-			snek_colour_list.main = snek_colour_list.options[selected_option]
-			settings.snek_colour = snek_colour_list.options[selected_option]
+		# Title for food dropdown menu
+		food_colour_title = fontsmall.render("Food", True, (white))
+		window.blit(food_colour_title, (350, 200))
+
+		# Title for background dropdown menu
+		background_colour_title = fontsmall.render("Background", True, (white))
+		window.blit(background_colour_title, (550, 200))
+
+		# Showcases the colour above snek colour menu
+		pygame.draw.rect(window, settings.snek_colour, pygame.Rect(140, 300, snek_block_size * 2, snek_block_size * 2))
+
+		# Showcases the colour above food colour menu
+		pygame.draw.rect(window, settings.food_colour, pygame.Rect(390, 300, snek_block_size * 2, snek_block_size * 2))
+
+		# Showcases the colour above background colour menu
+		pygame.draw.rect(window, settings.background_colour, pygame.Rect(640, 300, snek_block_size * 2, snek_block_size * 2))
+
+		# updates the dropdown menu and changes the colour of the snek
+		snek_colour_selected = snek_colour_list.update(event_list)
+		if snek_colour_selected >= 0:
+			snek_colour_list.main = snek_colour_list.options[snek_colour_selected]
+			settings.snek_colour = snek_colour_list.options[snek_colour_selected]
+
+		# updates the dropdown menu and changes the colour of the food
+		food_colour_selected = food_colour_list.update(event_list)
+		if food_colour_selected >= 0:
+			food_colour_list.main = food_colour_list.options[food_colour_selected]
+			settings.food_colour = food_colour_list.options[food_colour_selected]
+
+		# updates the dropdown menu and changes the colour of the background
+		background_colour_selected = background_colour_list.update(event_list)
+		if background_colour_selected >= 0:
+			background_colour_list.main = background_colour_list.options[background_colour_selected]
+			settings.background_colour = background_colour_list.options[background_colour_selected]
 		
-		#draws the dropdown menu
+		#draws the dropdown menus
 		snek_colour_list.draw(window)
+		food_colour_list.draw(window)
+		background_colour_list.draw(window)
 
 running = True
 start = True
