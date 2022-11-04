@@ -219,7 +219,7 @@ def play():
 # Options menu
 def options():
 
-	# Snek_colour menu
+	# Snek
 	snek_colour_list = DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
@@ -227,6 +227,7 @@ def options():
 					pygame.font.SysFont(None, 30), 
 					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])\
 	
+	# Food
 	food_colour_list = DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
@@ -234,6 +235,7 @@ def options():
 					pygame.font.SysFont(None, 30), 
 					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 
+	# Background
 	background_colour_list = DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
