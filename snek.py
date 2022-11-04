@@ -34,7 +34,7 @@ Controls:
 import pygame
 import random
 
-from options import *
+from classes import *
 
 pygame.init()
 
