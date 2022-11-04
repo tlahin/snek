@@ -4,8 +4,8 @@ SNAKE GAME PROJECT
 
 working on:
 
-	options button and its features
-	make settings list more readable
+	options menu and its features
+	over all structure
 
 todo:
 
