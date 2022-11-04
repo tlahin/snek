@@ -41,16 +41,17 @@ pygame.init()
 # Colours
 white = (255, 255, 255)
 black = (0, 0, 0)
+gray = (128,128,128)
 cyan = (50, 255, 255)
 pink = (255, 0, 150)
 blue = (0, 128, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
 yellow = (0, 255, 255)
-COLOR_INACTIVE = (100, 80, 255)
-COLOR_ACTIVE = (100, 200, 255)
-COLOR_LIST_INACTIVE = (255, 100, 100)
-COLOR_LIST_ACTIVE = (255, 150, 150)
+COLOR_INACTIVE = (white)
+COLOR_ACTIVE = (gray)
+COLOR_LIST_INACTIVE = (white)
+COLOR_LIST_ACTIVE = (gray)
 
 # Window init
 pygame.display.set_caption("Epic Game")
@@ -85,7 +86,7 @@ red_button = colour_button(900, 150, 100, 100, red)
 blue_button = colour_button(1010, 150, 100, 100, blue)
 
 # Settings 'struct'
-settings = create_settings(black, white, pink)
+settings = create_settings(black, white, red)
 
 # Initializing snek
 snek_speed = 10
@@ -249,7 +250,7 @@ def options():
 		pygame.display.update()
 
 		# Options menu background colour
-		window.fill(black)
+		window.fill(white)
 
 		event_list = pygame.event.get()
 		for event in event_list:
@@ -257,19 +258,19 @@ def options():
 				running = False
 
 		# Options menu title
-		options_menu = fontbig.render('Options' , True , (cyan))
+		options_menu = fontbig.render('Options' , True , (black))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
 		# Title for snek dropdown menu
-		snek_colour_title = fontsmall.render("Snek", True, (white))
+		snek_colour_title = fontsmall.render("Snek", True, (black))
 		window.blit(snek_colour_title, (100, 200))
 
 		# Title for food dropdown menu
-		food_colour_title = fontsmall.render("Food", True, (white))
+		food_colour_title = fontsmall.render("Food", True, (black))
 		window.blit(food_colour_title, (350, 200))
 
 		# Title for background dropdown menu
-		background_colour_title = fontsmall.render("Background", True, (white))
+		background_colour_title = fontsmall.render("Background", True, (black))
 		window.blit(background_colour_title, (550, 200))
 
 		# Showcases the colour above snek colour menu
@@ -315,7 +316,7 @@ while running:
 	window.blit(bg_main_menu, (0, 0))
 
 	# Main menu title
-	main_menu = fontbig.render('Main Menu' , True , (cyan))
+	main_menu = fontbig.render('Main Menu' , True , (black))
 	window.blit(main_menu, (width / 2 - 200, height / 2 - 200))
 
 	if start_button.draw(window):
