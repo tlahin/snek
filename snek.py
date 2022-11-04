@@ -219,12 +219,13 @@ def play():
 # Options menu
 def options():
 
-	list = DropDown(
+	# Snek_colour menu
+	snek_colour_list = DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
 					50, 150, 200, 50, 
 					pygame.font.SysFont(None, 30), 
-					"Select colour", ["GREEN", "YELLOW"])
+					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 	
 	running = True
 
@@ -232,32 +233,29 @@ def options():
 
 		pygame.display.update()
 
-		window.fill(settings.background_colour)
+		window.fill(black)
 
+		event_list = pygame.event.get()
+		for event in event_list:
+			if event.type == pygame.QUIT:
+				running = False
+
+		# Options menu title
 		options_menu = fontbig.render('Options' , True , (cyan))
 		window.blit(options_menu, (width / 2 - 150, 25))
 
-
-		if red_button.draw(window):
-			print("PRESSED_1")
-			settings.snek_colour = red
-
-		if blue_button.draw(window):
-			print("PRESSED_2")
-			settings.snek_colour = blue
-
+		#renders snek above the dropdown to showcase the colour
 		for pos in snek_body:
 			pygame.draw.rect(window, settings.snek_colour, pygame.Rect(pos[0] - 380, pos[1] - 450, snek_block_size * 2, snek_block_size * 2))
 
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				running = False
-			previous_event = event
-			if event != previous_event:
-				list.main = event
+		#updates the dropdown menu and changes the colour of the snake
+		selected_option = snek_colour_list.update(event_list)
+		if selected_option >= 0:
+			snek_colour_list.main = snek_colour_list.options[selected_option]
+			settings.snek_colour = snek_colour_list.options[selected_option]
 		
-		if list.draw(window):
-			print("hello")
+		#draws the dropdown menu
+		snek_colour_list.draw(window)
 
 running = True
 start = True
@@ -268,6 +266,8 @@ print("RUNNING")
 while running:
 
 	window.blit(bg_main_menu, (0, 0))
+
+	# Main menu title
 	main_menu = fontbig.render('Main Menu' , True , (cyan))
 	window.blit(main_menu, (width / 2 - 200, height / 2 - 200))
 
