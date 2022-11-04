@@ -85,7 +85,7 @@ red_button = colour_button(900, 150, 100, 100, red)
 blue_button = colour_button(1010, 150, 100, 100, blue)
 
 # Settings 'struct'
-settings = create_settings(white, white, pink)
+settings = create_settings(black, white, pink)
 
 # Initializing snek
 snek_speed = 10
@@ -96,7 +96,6 @@ snek_body = [
 				[520, 500],
 				[530, 500]
 			]
-
 
 # Pause game loop until space is pressed
 def pause_game():

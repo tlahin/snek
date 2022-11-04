@@ -50,14 +50,6 @@ class DropDown():
                     return self.active_option
         return -1
 
-# Settings for the gameloop
-class create_settings():
-
-	def __init__(self, snek_colour, background_colour, food_colour):
-		self.snek_colour = snek_colour
-		self.background_colour = background_colour
-		self.food_colour = food_colour
-    
 # Create a button using images.
 class image_button():
 
@@ -101,3 +93,12 @@ class colour_button():
             if pygame.mouse.get_pressed()[0] == 0:
                 self.clicked = False
             return mouse_action
+
+# Settings for the gameloop
+class create_settings():
+
+	def __init__(self, snek_colour, background_colour, food_colour):
+		self.snek_colour = snek_colour
+		self.background_colour = background_colour
+		self.food_colour = food_colour
+    
