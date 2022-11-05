@@ -95,10 +95,32 @@ class colour_button():
             return mouse_action
 
 # Settings for the gameloop
-class create_settings():
+class create_colour_settings():
 
 	def __init__(self, snek_colour, background_colour, food_colour):
 		self.snek_colour = snek_colour
 		self.background_colour = background_colour
 		self.food_colour = food_colour
-    
+
+# Struct that carries sneks data
+class create_snek_struct():
+
+    def __init__(self, snek_speed, snek_block_size, snek_head, snek_body):
+        self.snek_speed = snek_speed
+        self.snek_block_size = snek_block_size
+        self.snek_head = snek_head
+        self.snek_body = snek_body
+
+# Struct that carries window data
+class create_window_stuct():
+
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.window = pygame.display.set_mode((width, height))
+
+class create_background():
+
+    def __init__(self, width, height, colour):
+        self.surface = pygame.Surface((width, height))
+        self.colour = self.surface.fill(pygame.Color(colour))
