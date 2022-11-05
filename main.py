@@ -45,15 +45,8 @@ pygame.display.set_caption("Epic Game")
 # Window struct, carries width, height and the window surface
 window_data = create_window_stuct(1300, 800)
 
+# Main menu background
 bg_main_menu = create_background(window_data.width, window_data.height, 'aquamarine2')
-
-# Loads the pictures and scales them correctly
-start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
-start_img = pygame.transform.scale(start_img, (150, 50))
-options_img = pygame.image.load("./resources/options_button.png").convert_alpha()
-options_img = pygame.transform.scale(options_img, (150, 50))
-quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
-quit_img = pygame.transform.scale(quit_img, (150, 50))
 
 # Fonts
 fontsmall = pygame.font.SysFont('Arial', 40)
