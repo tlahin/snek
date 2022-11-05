@@ -45,32 +45,23 @@ pygame.display.set_caption("Epic Game")
 # Window struct, carries width, height and the window surface
 window_data = create_window_stuct(1300, 800)
 
+# Main menu background
 bg_main_menu = create_background(window_data.width, window_data.height, 'aquamarine2')
-
-# Loads the pictures and scales them correctly
-start_img = pygame.image.load("./resources/start_button.png").convert_alpha()
-start_img = pygame.transform.scale(start_img, (150, 50))
-options_img = pygame.image.load("./resources/options_button.png").convert_alpha()
-options_img = pygame.transform.scale(options_img, (150, 50))
-quit_img = pygame.image.load("./resources/quit_button.png").convert_alpha()
-quit_img = pygame.transform.scale(quit_img, (150, 50))
 
 # Fonts
 fontsmall = pygame.font.SysFont('Arial', 40)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 # Main menu buttons
-start_button = image_button(window_data.width / 2 - 150 / 2, window_data.height / 2, start_img)
-options_button = image_button(window_data.width / 2 - 150 / 2, window_data.height / 2 + 55, options_img)
-quit_button = image_button(window_data.width / 2 - 150 / 2, window_data.height / 2 + 110, quit_img)
+start_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 - 55, 100, 50, "START", pygame.font.SysFont(None, 50))
+options_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
+quit_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struck: (snek, background, food)
 colour_settings = create_colour_settings(pygame.Color('black'), ('gray'), ('red'))
 
 # Snek struct: (speed, block size, head cords, body cords)
 snek_data = create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
-
-# Pause game loop until space is pressed
 
 running = True
 start = True
@@ -87,10 +78,10 @@ while running:
 	if start_button.draw(window_data.window):
 		reset_data(snek_data)
 		play(snek_data, colour_settings, window_data)
-
+	
 	if options_button.draw(window_data.window):
 		options(snek_data, colour_settings, window_data)
-        
+
 	if quit_button.draw(window_data.window):
 		pygame.quit()
 	

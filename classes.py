@@ -50,29 +50,6 @@ class DropDown():
                     return self.active_option
         return -1
 
-# Create a button using images.
-class image_button():
-
-    def __init__(self, x, y, image):
-
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
-        self.clicked = False
-
-	# Render the button and create a event handler
-    def draw(self, surface):
-        mouse_action = False
-        mouse_pos = pygame.mouse.get_pos()
-        surface.blit(self.image, (self.rect.x, self.rect.y))
-        if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                mouse_action = True
-            if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
-            return mouse_action
-
 # Create a button with colours.
 class colour_button():
 
@@ -124,3 +101,25 @@ class create_background():
     def __init__(self, width, height, colour):
         self.surface = pygame.Surface((width, height))
         self.colour = self.surface.fill(pygame.Color(colour))
+
+# Create a button with text on it
+class text_button():
+
+    def __init__(self, x, y, width, heigh, text, font):
+        self.clicked = False
+        self.rect = pygame.Rect((x, y), (width, heigh))
+        self.text = text
+        self.font = font
+
+    def draw(self, surface):
+        msg = self.font.render(self.text, 1, (0, 0, 0))
+        surface.blit(msg, msg.get_rect(center = self.rect.center))
+        mouse_action = False
+        mouse_pos = pygame.mouse.get_pos()
+        if self.rect.collidepoint(mouse_pos):
+            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+                self.clicked = True
+                mouse_action = True
+            if pygame.mouse.get_pressed()[0] == 0:
+                self.clicked = False
+            return mouse_action
