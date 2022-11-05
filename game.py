@@ -2,6 +2,11 @@
 import pygame
 import random
 
+def reset_data(snek_data):
+
+	snek_data.snek_head = [510, 500]
+	snek_data.snek_body = [[510, 500], [520, 500], [530, 500]]
+
 def pause_game():
 
 	paused = True
@@ -21,7 +26,6 @@ def pause_game():
 def grow_tail(snek_data):
 
 	snek_data.snek_body.append([-10, -10])
-	print("GROWS")
 
 # Game loop
 def play(snek_data, colour_settings, window_data):
@@ -51,13 +55,10 @@ def play(snek_data, colour_settings, window_data):
 				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
 					current_direction = 'RIGHT'
 				if event.key == pygame.K_SPACE:
-					print("PAUSE")
 					if pause_game() == 1:
 						dead = True
-					print("RESUME")
 				# debug functionality | grows the snake when pressing 'g'
 				if event.key == pygame.K_g:
-					print("GROW")
 					grow_tail(snek_data)
 
 		# Prevents the snek from going backwards
@@ -116,5 +117,3 @@ def play(snek_data, colour_settings, window_data):
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
-
-	print("DEAD")

@@ -75,8 +75,6 @@ snek_data = create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530
 running = True
 start = True
 
-print("RUNNING")
-
 # Menu loop
 while running:
 
@@ -87,20 +85,17 @@ while running:
 	window_data.window.blit(main_menu, (window_data.width / 2 - 200, window_data.height / 2 - 200))
 
 	if start_button.draw(window_data.window):
-		print("START")
+		reset_data(snek_data)
 		play(snek_data, colour_settings, window_data)
 
 	if options_button.draw(window_data.window):
-		print("OPTIONS")
 		options(snek_data, colour_settings, window_data)
         
 	if quit_button.draw(window_data.window):
-		print("QUIT")
 		pygame.quit()
 	
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
-			print("EXIT")
 			running = False
 
 	pygame.display.flip()
