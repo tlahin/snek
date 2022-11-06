@@ -1,6 +1,6 @@
 import pygame
 
-from classes import *
+import classes
 
 # Dropdown menus colours when highlighted/not
 COLOR_INACTIVE = ('aquamarine2')
@@ -12,10 +12,10 @@ COLOR_LIST_ACTIVE = ('aquamarine')
 def options(snek_data, colour_settings, window_data):
 
     # Option menus background
-    bg_options_menu = create_background(window_data.width, window_data.height, 'aquamarine2')
+    bg_options_menu = classes.create_background(window_data.width, window_data.height, 'aquamarine2')
 
 	# Snek dropdown
-    snek_colour_list = DropDown(
+    snek_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
 					50, 350, 200, 50, 
@@ -23,7 +23,7 @@ def options(snek_data, colour_settings, window_data):
 					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])\
 	
 	# Food dropdown
-    food_colour_list = DropDown(
+    food_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
 					300, 350, 200, 50, 
@@ -31,7 +31,7 @@ def options(snek_data, colour_settings, window_data):
 					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 
 	# Background dropdown
-    background_colour_list = DropDown(
+    background_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
 					550, 350, 200, 50, 

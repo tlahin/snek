@@ -34,9 +34,9 @@ Controls:
 
 import pygame
 
-from classes import *
-from game import *
-from options import *
+import classes
+import game
+import options
 
 pygame.init()
 
@@ -44,25 +44,25 @@ pygame.init()
 pygame.display.set_caption("Epic Game")
 
 # Window struct, carries width, height and the window surface
-window_data = create_window_stuct(1300, 800)
+window_data = classes.create_window_stuct(1300, 800)
 
 # Main menu background
-bg_main_menu = create_background(window_data.width, window_data.height, 'aquamarine2')
+bg_main_menu = classes.create_background(window_data.width, window_data.height, 'aquamarine2')
 
 # Fonts
 fontsmall = pygame.font.SysFont('Arial', 40)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 # Main menu buttons
-start_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 - 55, 100, 50, "START", pygame.font.SysFont(None, 50))
-options_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
-quit_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
+start_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 - 55, 100, 50, "START", pygame.font.SysFont(None, 50))
+options_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
+quit_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struck: (snek, background, food)
-colour_settings = create_colour_settings(('black'), ('gray'), ('red'))
+colour_settings = classes.create_colour_settings(('black'), ('gray'), ('red'))
 
 # Snek struct: (speed, block size, head cords, body cords)
-snek_data = create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
+snek_data = classes.create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
 
 running = True
 
@@ -78,12 +78,12 @@ while running:
 
 	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
-		reset_data(snek_data)
-		play(snek_data, colour_settings, window_data)
+		game.reset_data(snek_data)
+		game.play(snek_data, colour_settings, window_data)
 	
 	# Options button in main menu to open options menu
 	if options_button.draw(window_data.window):
-		options(snek_data, colour_settings, window_data)
+		options.options(snek_data, colour_settings, window_data)
 
 	# Quit button to close the game
 	if quit_button.draw(window_data.window):

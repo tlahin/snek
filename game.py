@@ -2,7 +2,7 @@
 import pygame
 import random
 
-from classes import *
+import classes
 
 # Resets snek data to default starting position
 def reset_data(snek_data):
@@ -13,10 +13,10 @@ def reset_data(snek_data):
 def end_screen(window_data, score):
 	
 	# Go next button to return to main menu
-	go_next_button = text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
+	go_next_button = classes.text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
 
 	# End screen background
-	bg_end_menu = create_background(window_data.width, window_data.height, 'gray')
+	bg_end_menu = classes.create_background(window_data.width, window_data.height, 'gray')
 	window_data.window.blit(bg_end_menu.surface, (0, 0))
 
 	# End screen title to tilt the player
