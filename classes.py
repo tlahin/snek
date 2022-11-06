@@ -1,5 +1,6 @@
 import pygame
 
+# Create a dropdown menu with multiple choices
 class DropDown():
 
     def __init__(self, color_menu, color_option, x, y, w, h, font, main, options):

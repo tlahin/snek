@@ -69,22 +69,27 @@ running = True
 # Menu loop
 while running:
 
+	# Main menu background
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
 
 	# Main menu title
 	main_menu = fontbig.render('Main Menu', True , ('black'))
 	window_data.window.blit(main_menu, (window_data.width / 2 - 200, window_data.height / 2 - 200))
 
+	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
 		reset_data(snek_data)
 		play(snek_data, colour_settings, window_data)
 	
+	# Options button in main menu to open options menu
 	if options_button.draw(window_data.window):
 		options(snek_data, colour_settings, window_data)
 
+	# Quit button to close the game
 	if quit_button.draw(window_data.window):
 		pygame.quit()
 	
+	# Quits the program if you close the window
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False

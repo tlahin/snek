@@ -4,6 +4,7 @@ import random
 
 from classes import *
 
+# Resets snek data to default starting position
 def reset_data(snek_data):
 
 	snek_data.snek_head = [510, 500]
@@ -11,41 +12,48 @@ def reset_data(snek_data):
 
 def end_screen(window_data, score):
 	
-	cringe = True
-	
-	end_menu = create_background(window_data.width, window_data.height, 'gray')
-	ok_button = text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
+	# Go next button to return to main menu
+	go_next_button = text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
 
-	window_data.window.blit(end_menu.surface, (0, 0))
+	# End screen background
+	bg_end_menu = create_background(window_data.width, window_data.height, 'gray')
+	window_data.window.blit(bg_end_menu.surface, (0, 0))
 
+	# End screen title to tilt the player
 	end_title_font = pygame.font.SysFont('Arial', 80)
 	end_title_surface = end_title_font.render("You're cringe xDDd", True, ('black'))
 	end_title_rect = end_title_surface.get_rect()
 	end_title_rect.midtop = (window_data.width / 2, window_data.height / 4)
 	window_data.window.blit(end_title_surface, end_title_rect)
 
+	# Shows the finals score at the end screen and trash talks the player
 	end_score_font = pygame.font.SysFont('Arial', 80)
 	end_score_font = end_score_font.render("Only got " + str(score) + " punttos lmao", True, ('black'))
 	end_score_rect = end_score_font.get_rect()
 	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4 + 150)
 	window_data.window.blit(end_score_font, end_score_rect)
 
-	while cringe:
+	ended = False
+
+	while not ended:
 
 		pygame.display.update()
 
-		if ok_button.draw(window_data.window):
-			cringe = False
+		# When clicked closes the end screen and returns to main menu
+		if go_next_button.draw(window_data.window):
+			ended = True
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
-				cringe = False
+				ended = True
 
+# Pause game function
 def pause_game():
 
 	paused = True
 
 	while paused:
+
 		for event in pygame.event.get():
 			#if you exit the window during pause function it returns '1'
 			if event.type == pygame.QUIT:
@@ -56,14 +64,19 @@ def pause_game():
 					return False
 	return True
 
+# Renders score at the bottom of the screen, updates it in real time
 def score_board(window_data, score):
 
+	# Text font
 	score_font = pygame.font.SysFont('Arial', 80)
 
+	# Content
 	score_surface = score_font.render('Punttos: ' + str(score), True, ('black'))
 
+	# Board rect
 	score_rect = pygame.Rect(0, 715, 1300, 700)
 
+	# Draws the rect with the content
 	window_data.window.blit(score_surface, score_rect)
 
 # Grow snek
@@ -153,6 +166,7 @@ def play(snek_data, colour_settings, window_data):
 			snack_pos = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
 			snack_spawned = True
 
+		# Displays the score
 		score_board(window_data, score)
 
 		# Grow snek when colliding with food
@@ -170,5 +184,6 @@ def play(snek_data, colour_settings, window_data):
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 	
+	#  If you suck at the game you end up here
 	if dead:
 		end_screen(window_data, score)

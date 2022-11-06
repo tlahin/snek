@@ -2,6 +2,7 @@ import pygame
 
 from classes import *
 
+# Dropdown menus colours when highlighted/not
 COLOR_INACTIVE = ('aquamarine2')
 COLOR_ACTIVE = ('aquamarine')
 COLOR_LIST_INACTIVE = ('aquamarine2')
@@ -10,6 +11,7 @@ COLOR_LIST_ACTIVE = ('aquamarine')
 # Options menu
 def options(snek_data, colour_settings, window_data):
 
+    # Option menus background
     bg_options_menu = create_background(window_data.width, window_data.height, 'aquamarine2')
 
 	# Snek dropdown
@@ -55,18 +57,6 @@ def options(snek_data, colour_settings, window_data):
         fontbig = pygame.font.SysFont('Arial', 80)
         options_menu = fontbig.render('Options' , True , ('black'))
         window_data.window.blit(options_menu, (window_data.width / 2 - 150, 25))
-
-        """ # Title for snek dropdown menu
-        snek_colour_title = fontsmall.render("Snek", True, (black))
-		window_data.window.blit(snek_colour_title, (100, 200))
-
-		# Title for food dropdown menu
-		food_colour_title = fontsmall.render("Food", True, (black))
-		window_data.window.blit(food_colour_title, (350, 200))
-
-		# Title for background dropdown menu
-		background_colour_title = fontsmall.render("Background", True, (black))
-		window_data.window.blit(background_colour_title, (550, 200)) """
 
 		# Showcases the colour above snek colour menu
         pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(140, 300, snek_data.snek_block_size * 2, snek_data.snek_block_size * 2))
