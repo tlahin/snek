@@ -95,6 +95,8 @@ class create_window_stuct():
         self.width = width
         self.height = height
         self.window = pygame.display.set_mode((width, height))
+        self.game_width = width
+        self.game_height = height - 100
 
 class create_background():
 

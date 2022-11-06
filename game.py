@@ -2,10 +2,44 @@
 import pygame
 import random
 
+from classes import *
+
 def reset_data(snek_data):
 
 	snek_data.snek_head = [510, 500]
 	snek_data.snek_body = [[510, 500], [520, 500], [530, 500]]
+
+def end_screen(window_data, score):
+	
+	cringe = True
+	
+	end_menu = create_background(window_data.width, window_data.height, 'gray')
+	ok_button = text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
+
+	window_data.window.blit(end_menu.surface, (0, 0))
+
+	end_title_font = pygame.font.SysFont('Arial', 80)
+	end_title_surface = end_title_font.render("You're cringe xDDd", True, ('black'))
+	end_title_rect = end_title_surface.get_rect()
+	end_title_rect.midtop = (window_data.width / 2, window_data.height / 4)
+	window_data.window.blit(end_title_surface, end_title_rect)
+
+	end_score_font = pygame.font.SysFont('Arial', 80)
+	end_score_font = end_score_font.render("Only got " + str(score) + " punttos lmao", True, ('black'))
+	end_score_rect = end_score_font.get_rect()
+	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4 + 150)
+	window_data.window.blit(end_score_font, end_score_rect)
+
+	while cringe:
+
+		pygame.display.update()
+
+		if ok_button.draw(window_data.window):
+			cringe = False
+
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				cringe = False
 
 def pause_game():
 
@@ -22,6 +56,16 @@ def pause_game():
 					return False
 	return True
 
+def score_board(window_data, score):
+
+	score_font = pygame.font.SysFont('Arial', 80)
+
+	score_surface = score_font.render('Punttos: ' + str(score), True, ('black'))
+
+	score_rect = pygame.Rect(0, 715, 1300, 700)
+
+	window_data.window.blit(score_surface, score_rect)
+
 # Grow snek
 def grow_tail(snek_data):
 
@@ -35,6 +79,7 @@ def play(snek_data, colour_settings, window_data):
 	new_direction = 'LEFT'
 	current_direction = new_direction
 	fps = pygame.time.Clock()
+	score = 0
 
 	while not dead:
 
@@ -59,7 +104,11 @@ def play(snek_data, colour_settings, window_data):
 						dead = True
 				# debug functionality | grows the snake when pressing 'g'
 				if event.key == pygame.K_g:
+					score += 1
 					grow_tail(snek_data)
+				# debug functionality | respawns food when pressing 'h'
+				if event.key == pygame.K_h:
+					snack_spawned = False
 
 		# Prevents the snek from going backwards
 		if current_direction == 'UP' and new_direction != 'DOWN':
@@ -83,16 +132,17 @@ def play(snek_data, colour_settings, window_data):
 
 		# Checks if snek hits a wall and makes it come out the otherside
 		if snek_data.snek_head[0] < 0:
-			snek_data.snek_head[0] = window_data.width - snek_data.snek_block_size
-		elif snek_data.snek_head[0] >= window_data.width:
+			snek_data.snek_head[0] = window_data.game_width - snek_data.snek_block_size
+		elif snek_data.snek_head[0] >= window_data.game_width:
 			snek_data.snek_head[0] = 0
 		if snek_data.snek_head[1] < 0:
-			snek_data.snek_head[1] = window_data.height - snek_data.snek_block_size
-		elif snek_data.snek_head[1] >= window_data.height:
+			snek_data.snek_head[1] = window_data.game_height - snek_data.snek_block_size
+		elif snek_data.snek_head[1] >= window_data.game_height:
 			snek_data.snek_head[1] = 0
 
 		# Set background colour
-		window_data.window.fill(colour_settings.background_colour)
+		window_data.window.fill(colour_settings.background_colour, pygame.Rect(0, 0, 1300, 800))
+		pygame.draw.rect(window_data.window, ('aquamarine2'), pygame.Rect(0, 700, 1300, 100))
 
 		# Add new snake block in the direction of movement and remove last block
 		snek_data.snek_body.insert(0, list(snek_data.snek_head))
@@ -100,11 +150,14 @@ def play(snek_data, colour_settings, window_data):
 
 		# Checks if theres an active food if not generates a new one within the window
 		if snack_spawned == False:
-			snack_pos = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 10) * 10]
+			snack_pos = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
 			snack_spawned = True
+
+		score_board(window_data, score)
 
 		# Grow snek when colliding with food
 		if snek_data.snek_head == snack_pos:
+			score += 1
 			grow_tail(snek_data)
 			snack_spawned = False
 
@@ -115,5 +168,8 @@ def play(snek_data, colour_settings, window_data):
         # Rendering snake and snacks
 		for pos in snek_data.snek_body:
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
-
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
+	
+	if dead:
+		print("gf")
+		end_screen(window_data, score)
