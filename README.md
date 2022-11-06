@@ -7,7 +7,7 @@
 
 # Usage
 
-	python snek.py
+	python main.py
 
 # Todo
 
