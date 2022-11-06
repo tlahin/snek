@@ -171,5 +171,4 @@ def play(snek_data, colour_settings, window_data):
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 	
 	if dead:
-		print("gf")
 		end_screen(window_data, score)
