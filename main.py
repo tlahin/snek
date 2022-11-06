@@ -58,13 +58,12 @@ options_button = text_button(window_data.width / 2 - 100 / 2, window_data.height
 quit_button = text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struck: (snek, background, food)
-colour_settings = create_colour_settings(pygame.Color('black'), ('gray'), ('red'))
+colour_settings = create_colour_settings(('black'), ('gray'), ('red'))
 
 # Snek struct: (speed, block size, head cords, body cords)
 snek_data = create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
 
 running = True
-start = True
 
 # Menu loop
 while running:
@@ -72,7 +71,7 @@ while running:
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
 
 	# Main menu title
-	main_menu = fontbig.render('Main Menu' , True , ('black'))
+	main_menu = fontbig.render('Main Menu', True , ('black'))
 	window_data.window.blit(main_menu, (window_data.width / 2 - 200, window_data.height / 2 - 200))
 
 	if start_button.draw(window_data.window):
@@ -90,3 +89,5 @@ while running:
 			running = False
 
 	pygame.display.flip()
+
+pygame.quit()
