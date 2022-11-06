@@ -10,11 +10,7 @@ working on:
 todo:
 
 	Add walls the snake has to avoid or else it dies
-	Options/Settings? colours, speed, screen size etc...
-	Score?
 	AI to play the game itself?
-
-	WHEN KYS DO END SCREEN
 
 authors:
 	tlahin
@@ -28,6 +24,10 @@ Controls:
 		'wasd' or arrow keys
 	Pause/unpause:
 		'space'
+
+	debug: 
+		'g' to grow
+		'h' to respawn food
 
 """
 
