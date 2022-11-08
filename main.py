@@ -58,12 +58,6 @@ start_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.
 options_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
 quit_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
-# Exit button and it's image
-exit_img = pygame.image.load("./recources/exit_button.png").convert_alpha()
-exit_img = pygame.transform.scale(exit_img, (25, 25))
-
-exit_button = classes.exit_button(1250, 25, exit_img)
-
 # Settings struck: (snek, background, food)
 colour_settings = classes.colour_settings(('black'), ('gray'), ('red'))
 
@@ -94,7 +88,6 @@ while running:
 	# Quit button to close the game
 	if quit_button.draw(window_data.window):
 		pygame.quit()
-		break
 
 	# Quits the program if you close the window
 	for event in pygame.event.get():

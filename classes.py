@@ -152,7 +152,7 @@ class exit_button():
 
 	def draw(self, surface):
 
-		pygame.draw.rect(surface, self.colour, self.rect)
+		surface.blit(self.image, (self.rect.x,  self.rect.y))
 		mouse_pos = pygame.mouse.get_pos()
 		mouse_action = False
 

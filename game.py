@@ -74,7 +74,7 @@ def score_board(window_data, score):
 	score_surface = score_font.render('Punttos: ' + str(score), True, ('black'))
 
 	# Board rect
-	score_rect = pygame.Rect(0, 715, 1300, 700)
+	score_rect = pygame.Rect(5, 705, 1300, 700)
 
 	# Draws the rect with the content
 	window_data.window.blit(score_surface, score_rect)
@@ -86,6 +86,11 @@ def grow_tail(snek_data):
 
 # Game loop
 def play(snek_data, colour_settings, window_data):
+
+	# Exit button and it's image
+	exit_img = pygame.image.load("./recources/exit_button.png").convert_alpha()
+	exit_img = pygame.transform.scale(exit_img, (50, 50))
+	exit_button = classes.exit_button(1225, 725, exit_img)
 
 	dead = False
 	snack_spawned = False
@@ -183,6 +188,10 @@ def play(snek_data, colour_settings, window_data):
 		for pos in snek_data.snek_body:
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
+
+		# Breaks the loops and shows end screen when pressed
+		if exit_button.draw(window_data.window):
+			dead = True
 
 	#  If you suck at the game you end up here
 	if dead:
