@@ -75,8 +75,8 @@ while running:
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
 
 	# Main menu title
-	main_menu = fontbig.render('Main Menu', True , ('black'))
-	window_data.window.blit(main_menu, (window_data.width / 2 - 200, window_data.height / 2 - 200))
+	main_menu = fontbig.render('SNEK', True , ('black'))
+	window_data.window.blit(main_menu, (window_data.width / 2 - 110, window_data.height / 2 - 200))
 
 	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
