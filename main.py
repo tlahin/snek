@@ -69,6 +69,8 @@ running = True
 # Menu loop
 while running:
 
+	pygame.display.flip()
+
 	# Main menu background
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
 
@@ -87,13 +89,13 @@ while running:
 
 	# Quit button to close the game
 	if quit_button.draw(window_data.window):
+		running = False
 		pygame.quit()
 
 	# Quits the program if you close the window
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
-
-	pygame.display.flip()
+			pygame.quit()
 
 pygame.quit()

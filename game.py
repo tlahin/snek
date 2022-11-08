@@ -48,12 +48,14 @@ def end_screen(window_data, score):
 				ended = True
 
 # Pause game function
-def pause_game():
+def pause_game(window_data, exit_button):
 
 	paused = True
 
 	while paused:
 
+		if exit_button.draw(window_data.window):
+			return 1
 		for event in pygame.event.get():
 			#if you exit the window during pause function it returns '1'
 			if event.type == pygame.QUIT:
@@ -118,7 +120,7 @@ def play(snek_data, colour_settings, window_data):
 				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
 					current_direction = 'RIGHT'
 				if event.key == pygame.K_SPACE:
-					if pause_game() == 1:
+					if pause_game(window_data, exit_button) == 1:
 						dead = True
 				# debug functionality | grows the snake when pressing 'g'
 				if event.key == pygame.K_g:
@@ -196,3 +198,5 @@ def play(snek_data, colour_settings, window_data):
 	#  If you suck at the game you end up here
 	if dead:
 		end_screen(window_data, score)
+
+pygame.quit()
