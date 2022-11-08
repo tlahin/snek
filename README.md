@@ -1,4 +1,4 @@
-# A snake game with custom features
+# SNAKE GAME PROJECT (AAA game btw)
 
 # Requirements
 
@@ -9,8 +9,32 @@
 
 	python main.py
 
-# Todo
+# Working on:
 
-    - Add walls that the snake has to avoid or else it dies
-	- Powerups such as speed or immunity
-    - AI to play the game itself(?)
+	Next up walls (?)
+
+# Todo:
+
+	Add walls the snake has to avoid or else it dies
+	Powerups such as speed or immunity
+	AI to play the game itself?
+
+# Controls:
+
+	Move:
+		'wasd' or arrow keys
+	Pause/unpause:
+		'space'
+
+	debug:
+		'g' to grow
+		'h' to respawn food
+
+# Authors:
+
+	tlahin
+	Poks
+
+# Started:
+
+	Oct 26, 2022

@@ -1,36 +1,5 @@
-"""
 
-SNAKE GAME PROJECT
-
-working on:
-
-	options menu and its features
-	over all structure
-
-todo:
-
-	Add walls the snake has to avoid or else it dies
-	Powerups such as speed or immunity
-	AI to play the game itself?
-
-authors:
-	tlahin
-	Poks
-
-Started:
-	Oct 26, 2022
-
-Controls:
-	Move:
-		'wasd' or arrow keys
-	Pause/unpause:
-		'space'
-
-	debug:
-		'g' to grow
-		'h' to respawn food
-
-"""
+# README.md :)
 
 import pygame
 
