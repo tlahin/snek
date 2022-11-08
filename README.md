@@ -15,9 +15,9 @@
 
 # Todo:
 
-	Add walls the snake has to avoid or else it dies
-	Powerups such as speed or immunity
-	AI to play the game itself?
+	- Add walls the snake has to avoid or else it dies
+	- Powerups such as speed or immunity
+	- AI to play the game itself?
 
 # Controls:
 
@@ -32,8 +32,8 @@
 
 # Authors:
 
-	tlahin
-	Poks
+	[Tlahin](https://github.com/tlahin)
+	[Poks](https://github.com/pokspoks)
 
 # Started:
 
