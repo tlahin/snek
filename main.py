@@ -15,6 +15,11 @@ pygame.display.set_caption("Epic Game")
 # Window struct, carries width, height and the window surface
 window_data = classes.window_stuct(1300, 800)
 
+# Main menu background img
+snek_img = pygame.image.load("./recources/snek_bg.png").convert_alpha()
+
+
+
 # Main menu background
 bg_main_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')
 
@@ -42,10 +47,11 @@ while running:
 
 	# Main menu background
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
+	window_data.window.blit(snek_img, (550, 140))
 
 	# Main menu title
 	main_menu = fontbig.render('SNEK', True , ('black'))
-	window_data.window.blit(main_menu, (window_data.width / 2 - 110, window_data.height / 2 - 200))
+	window_data.window.blit(main_menu, (window_data.width / 2 - 110, 50))
 
 	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
