@@ -31,9 +31,9 @@
 		'h' to respawn food
 
 # Authors:
-
-	[Tlahin] (https://github.com/tlahin)
-	[Poks] (https://github.com/pokspoks)
+	
+	[Tlahin](github.com/tlahin)
+	[Poks](github.com/pokspoks)
 
 # Started:
 
