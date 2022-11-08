@@ -32,8 +32,8 @@
 
 # Authors:
 	
-	[Tlahin](github.com/tlahin)
-	[Poks](github.com/pokspoks)
+[Tlahin](github.com/tlahin)
+[Poks](github.com/pokspoks)
 
 # Started:
 
