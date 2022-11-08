@@ -84,6 +84,7 @@ def score_board(window_data, score):
 # Grow snek
 def grow_tail(snek_data):
 
+	# Adds a new element to snek_body list
 	snek_data.snek_body.append([-10, -10])
 
 # Game loop
@@ -198,5 +199,3 @@ def play(snek_data, colour_settings, window_data):
 	#  If you suck at the game you end up here
 	if dead:
 		end_screen(window_data, score)
-
-pygame.quit()
