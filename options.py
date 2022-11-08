@@ -11,6 +11,11 @@ COLOR_LIST_ACTIVE = ('aquamarine')
 # Options menu
 def options(snek_data, colour_settings, window_data):
 
+	# Exit button and it's image
+	exit_img = pygame.image.load("./recources/exit_button.png").convert_alpha()
+	exit_img = pygame.transform.scale(exit_img, (50, 50))
+	exit_button = classes.exit_button(1225, 725, exit_img)
+
 	# Option menus background
 	bg_options_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')
 
@@ -45,7 +50,6 @@ def options(snek_data, colour_settings, window_data):
 		pygame.display.update()
 
 		# Options menu background colour
-		#window_data.window.fill(white)
 		window_data.window.blit(bg_options_menu.surface, (0, 0))
 
 		event_list = pygame.event.get()
@@ -85,7 +89,11 @@ def options(snek_data, colour_settings, window_data):
 			background_colour_list.main = background_colour_list.options[background_colour_selected]
 			colour_settings.background_colour = background_colour_list.options[background_colour_selected]
 
-		#draws the dropdown menus
+		# Draws the dropdown menus
 		snek_colour_list.draw(window_data.window)
 		food_colour_list.draw(window_data.window)
 		background_colour_list.draw(window_data.window)
+
+		# Draws the exit button
+		if exit_button.draw(window_data.window):
+			running = False
