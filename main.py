@@ -90,7 +90,6 @@ while running:
 	# Quit button to close the game
 	if quit_button.draw(window_data.window):
 		running = False
-		pygame.quit()
 
 	# Quits the program if you close the window
 	for event in pygame.event.get():

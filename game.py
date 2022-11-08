@@ -23,14 +23,14 @@ def end_screen(window_data, score):
 	end_title_font = pygame.font.SysFont('Arial', 80)
 	end_title_surface = end_title_font.render("Don't be sorry, be better.", True, ('black'))
 	end_title_rect = end_title_surface.get_rect()
-	end_title_rect.midtop = (window_data.width / 2, window_data.height / 4)
+	end_title_rect.midtop = (window_data.width / 2, window_data.height / 4 + 150)
 	window_data.window.blit(end_title_surface, end_title_rect)
 
 	# Shows the finals score at the end screen and trash talks the player
 	end_score_font = pygame.font.SysFont('Arial', 80)
 	end_score_font = end_score_font.render("Only got " + str(score) + " punttos ._.", True, ('black'))
 	end_score_rect = end_score_font.get_rect()
-	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4 + 150)
+	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4)
 	window_data.window.blit(end_score_font, end_score_rect)
 
 	ended = False
