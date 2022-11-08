@@ -11,24 +11,24 @@ def reset_data(snek_data):
 	snek_data.snek_body = [[510, 500], [520, 500], [530, 500]]
 
 def end_screen(window_data, score):
-	
+
 	# Go next button to return to main menu
 	go_next_button = classes.text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
 
 	# End screen background
-	bg_end_menu = classes.create_background(window_data.width, window_data.height, 'gray')
+	bg_end_menu = classes.background(window_data.width, window_data.height, 'gray')
 	window_data.window.blit(bg_end_menu.surface, (0, 0))
 
 	# End screen title to tilt the player
 	end_title_font = pygame.font.SysFont('Arial', 80)
-	end_title_surface = end_title_font.render("You're cringe xDDd", True, ('black'))
+	end_title_surface = end_title_font.render("Don't be sorry, be better.", True, ('black'))
 	end_title_rect = end_title_surface.get_rect()
 	end_title_rect.midtop = (window_data.width / 2, window_data.height / 4)
 	window_data.window.blit(end_title_surface, end_title_rect)
 
 	# Shows the finals score at the end screen and trash talks the player
 	end_score_font = pygame.font.SysFont('Arial', 80)
-	end_score_font = end_score_font.render("Only got " + str(score) + " punttos lmao", True, ('black'))
+	end_score_font = end_score_font.render("Only got " + str(score) + " punttos ._.", True, ('black'))
 	end_score_rect = end_score_font.get_rect()
 	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4 + 150)
 	window_data.window.blit(end_score_font, end_score_rect)
@@ -179,11 +179,11 @@ def play(snek_data, colour_settings, window_data):
 		if snek_data.snek_head in snek_data.snek_body[1::]:
 			dead = True
 
-        # Rendering snake and snacks
+		# Rendering snake and snacks
 		for pos in snek_data.snek_body:
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
-	
+
 	#  If you suck at the game you end up here
 	if dead:
 		end_screen(window_data, score)

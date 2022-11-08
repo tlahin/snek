@@ -26,7 +26,7 @@ Controls:
 	Pause/unpause:
 		'space'
 
-	debug: 
+	debug:
 		'g' to grow
 		'h' to respawn food
 
@@ -44,10 +44,10 @@ pygame.init()
 pygame.display.set_caption("Epic Game")
 
 # Window struct, carries width, height and the window surface
-window_data = classes.create_window_stuct(1300, 800)
+window_data = classes.window_stuct(1300, 800)
 
 # Main menu background
-bg_main_menu = classes.create_background(window_data.width, window_data.height, 'aquamarine2')
+bg_main_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')
 
 # Fonts
 fontsmall = pygame.font.SysFont('Arial', 40)
@@ -58,11 +58,17 @@ start_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.
 options_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
 quit_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
+# Exit button and it's image
+exit_img = pygame.image.load("./recources/exit_button.png").convert_alpha()
+exit_img = pygame.transform.scale(exit_img, (25, 25))
+
+exit_button = classes.exit_button(1250, 25, exit_img)
+
 # Settings struck: (snek, background, food)
-colour_settings = classes.create_colour_settings(('black'), ('gray'), ('red'))
+colour_settings = classes.colour_settings(('black'), ('gray'), ('red'))
 
 # Snek struct: (speed, block size, head cords, body cords)
-snek_data = classes.create_snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
+snek_data = classes.snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
 
 running = True
 
@@ -80,7 +86,7 @@ while running:
 	if start_button.draw(window_data.window):
 		game.reset_data(snek_data)
 		game.play(snek_data, colour_settings, window_data)
-	
+
 	# Options button in main menu to open options menu
 	if options_button.draw(window_data.window):
 		options.options(snek_data, colour_settings, window_data)
@@ -89,7 +95,7 @@ while running:
 	if quit_button.draw(window_data.window):
 		pygame.quit()
 		break
-	
+
 	# Quits the program if you close the window
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
