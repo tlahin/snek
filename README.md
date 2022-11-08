@@ -11,7 +11,7 @@
 
 # Working on:
 
-	Next up walls (?)
+	Walls (?)
 
 # Todo:
 
@@ -34,6 +34,3 @@
 	
 [Tlahin](github.com/tlahin) and [Poks](github.com/pokspoks)
 
-# Started:
-
-	Oct 26, 2022
