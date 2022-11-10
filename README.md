@@ -1,5 +1,10 @@
 # SNAKE GAME PROJECT (AAA game btw)
 
+Idea is simple. 
+Reproduce the good old snake game with some modifications.
+Purpose of the project personally is to learn more python and pygame library and the syntax in general. 
+A fellow contributor [Poks](github.com/pokspoks) helps me here and there with some of the problems I face during the journey.
+
 # Requirements
 
 	python (version?)
