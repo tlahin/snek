@@ -2,6 +2,8 @@ import random
 
 import classes
 
+# Creates the wall struct and calculates its position to wall.cords
+# needs some sort of pattern not just the same staircase everytime...
 def spawn_wall(snek_data, window_data):
 
     start_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
@@ -19,12 +21,14 @@ def spawn_wall(snek_data, window_data):
         j += 1
     return wall
 
+# Initial spawn location and creation of the snack struct
 def spawn_snack(snek_data, window_data, wall):
 
     starting_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
     snack = classes.snack_struct(starting_cords, snek_data.block_size, 'green', False, wall)
     return snack
 
+# Spawns a new snack at a new random location
 def update_snack(snack, window_data):
 
     i = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
