@@ -12,7 +12,7 @@ COLOR_LIST_ACTIVE = ('aquamarine')
 def options(snek_data, colour_settings, window_data):
 
 	# Exit button and it's image
-	exit_img = pygame.image.load("./recources/exit_button.png").convert_alpha()
+	exit_img = pygame.image.load("./resources/exit_button.png").convert_alpha()
 	exit_img = pygame.transform.scale(exit_img, (50, 50))
 	exit_button = classes.exit_button(1225, 725, exit_img)
 
@@ -63,13 +63,13 @@ def options(snek_data, colour_settings, window_data):
 		window_data.window.blit(options_menu, (window_data.width / 2 - 150, 25))
 
 		# Showcases the colour above snek colour menu
-		pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(140, 300, snek_data.snek_block_size * 2, snek_data.snek_block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(140, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
 		# Showcases the colour above food colour menu
-		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(390, 300, snek_data.snek_block_size * 2, snek_data.snek_block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(390, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
 		# Showcases the colour above background colour menu
-		pygame.draw.rect(window_data.window, colour_settings.background_colour, pygame.Rect(640, 300, snek_data.snek_block_size * 2, snek_data.snek_block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.background_colour, pygame.Rect(640, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
 		# updates the dropdown menu and changes the colour of the snek
 		snek_colour_selected = snek_colour_list.update(event_list)
