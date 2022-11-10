@@ -173,3 +173,14 @@ class wall_struct():
 		self.length = length
 		self.size = size
 		self.colour = colour
+
+# Create snacks
+class snack_struct():
+
+	def __init__(self, snack_cords, size, colour, spawned, wall):
+		
+		self.cords = snack_cords
+		self.size = size
+		self.colour = colour
+		self.spawned = spawned
+		self.wall = wall
