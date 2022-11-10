@@ -10,8 +10,8 @@ Purpose of the project personally is to learn more python, pygame library and th
 	pygame (version?)
 
 # Usage
-
-	python main.py
+to launch the game, go to the root of the directory and type
+	`python main.py`
 
 # Working on:
 
