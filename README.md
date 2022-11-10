@@ -2,8 +2,7 @@
 
 Idea is simple. 
 Reproduce the good old snake game with some modifications.
-Purpose of the project personally is to learn more python, pygame library and the syntax in general aswell as to see if I can actually code something on my own besides school work :). 
-A fellow contributor [Poks](github.com/pokspoks) helps me here and there with some of the problems I face during the journey.
+Purpose of the project personally is to learn more python, pygame library and the syntax in general aswell as to see if I can actually code something on my own besides school work 😄. A fellow contributor [Poks](github.com/pokspoks) helps me here and there with some of the problems I face during the journey.
 
 # Requirements
 
