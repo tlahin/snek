@@ -27,6 +27,7 @@ To launch the game, go to the root of the directory and type
 
 	Move:
 		'wasd' or arrow keys
+		
 	Pause/unpause:
 		'space'
 
