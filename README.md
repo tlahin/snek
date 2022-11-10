@@ -11,13 +11,13 @@
 
 # Working on:
 
-	Walls (?)
+	Walls
 
 # Todo:
 
 	- Add walls the snake has to avoid or else it dies
 	- Powerups such as speed or immunity
-	- AI to play the game itself?
+	- AI to play the game itself
 
 # Controls:
 
