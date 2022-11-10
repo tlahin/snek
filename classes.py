@@ -92,10 +92,10 @@ class snek_struct():
 
 	def __init__(self, snek_speed, snek_block_size, snek_head, snek_body):
 
-		self.snek_speed = snek_speed
-		self.snek_block_size = snek_block_size
-		self.snek_head = snek_head
-		self.snek_body = snek_body
+		self.speed = snek_speed
+		self.block_size = snek_block_size
+		self.head = snek_head
+		self.body = snek_body
 
 # Struct that carries window data
 class window_stuct():
@@ -140,7 +140,7 @@ class text_button():
 				self.clicked = False
 			return mouse_action
 
-# Class to create an exit button with an image | x, y cords for topleft corner of the image
+# Create an exit button with an image | x, y cords for topleft corner of the image
 class exit_button():
 
 	def __init__(self, x, y, image):
@@ -163,3 +163,13 @@ class exit_button():
 			if pygame.mouse.get_pressed()[0] == 0:
 				self.clicked = False
 			return mouse_action
+
+# Create walls
+class wall_struct():
+
+	def __init__(self, wall_cords, length, size, colour):
+		
+		self.cords = wall_cords
+		self.length = length
+		self.size = size
+		self.colour = colour

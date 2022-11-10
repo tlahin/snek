@@ -3,12 +3,13 @@ import pygame
 import random
 
 import classes
+import game_objects
 
 # Resets snek data to default starting position
 def reset_data(snek_data):
 
-	snek_data.snek_head = [510, 500]
-	snek_data.snek_body = [[510, 500], [520, 500], [530, 500]]
+	snek_data.head = [510, 500]
+	snek_data.body = [[510, 500], [520, 500], [530, 500]]
 
 def end_screen(window_data, score):
 
@@ -16,7 +17,7 @@ def end_screen(window_data, score):
 	go_next_button = classes.text_button(window_data.width / 2 - 150 / 2, 550, 150, 75, "go next", pygame.font.SysFont('Arial', 40))
 
 	# End screen background
-	bg_end_menu = classes.background(window_data.width, window_data.height, 'gray')
+	bg_end_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')
 	window_data.window.blit(bg_end_menu.surface, (0, 0))
 
 	# End screen title to tilt the player
@@ -84,8 +85,8 @@ def score_board(window_data, score):
 # Grow snek
 def grow_tail(snek_data):
 
-	# Adds a new element to snek_body list
-	snek_data.snek_body.append([-10, -10])
+	# Adds a new element to body list
+	snek_data.body.append([-10, -10])
 
 # Game loop
 def play(snek_data, colour_settings, window_data):
@@ -102,9 +103,16 @@ def play(snek_data, colour_settings, window_data):
 	fps = pygame.time.Clock()
 	score = 0
 
+	# wall
+	start_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	wall_cords = [[start_cords[0], start_cords[1]]]
+	# Wall (window_data, size, length, colour)
+	wall = classes.wall_struct(wall_cords, 5, snek_data.block_size, 'red')
+	game_objects.walls(wall, snek_data)
+
 	while not dead:
 
-		fps.tick(snek_data.snek_speed)
+		fps.tick(snek_data.speed)
 		pygame.display.update()
 
 		# Get inputs
@@ -143,59 +151,71 @@ def play(snek_data, colour_settings, window_data):
 
 		# Moves the snek to the direction
 		if new_direction == 'UP':
-			snek_data.snek_head[1] -= snek_data.snek_block_size
+			snek_data.head[1] -= snek_data.block_size
 		if new_direction == 'DOWN':
-			snek_data.snek_head[1] += snek_data.snek_block_size
+			snek_data.head[1] += snek_data.block_size
 		if new_direction == 'LEFT':
-			snek_data.snek_head[0] -= snek_data.snek_block_size
+			snek_data.head[0] -= snek_data.block_size
 		if new_direction == 'RIGHT':
-			snek_data.snek_head[0] += snek_data.snek_block_size
+			snek_data.head[0] += snek_data.block_size
 
 		# Checks if snek hits a wall and makes it come out the otherside
-		if snek_data.snek_head[0] < 0:
-			snek_data.snek_head[0] = window_data.game_width - snek_data.snek_block_size
-		elif snek_data.snek_head[0] >= window_data.game_width:
-			snek_data.snek_head[0] = 0
-		if snek_data.snek_head[1] < 0:
-			snek_data.snek_head[1] = window_data.game_height - snek_data.snek_block_size
-		elif snek_data.snek_head[1] >= window_data.game_height:
-			snek_data.snek_head[1] = 0
+		if snek_data.head[0] < 0:
+			snek_data.head[0] = window_data.game_width - snek_data.block_size
+		elif snek_data.head[0] >= window_data.game_width:
+			snek_data.head[0] = 0
+		if snek_data.head[1] < 0:
+			snek_data.head[1] = window_data.game_height - snek_data.block_size
+		elif snek_data.head[1] >= window_data.game_height:
+			snek_data.head[1] = 0
 
 		# Set background colour
 		window_data.window.fill(colour_settings.background_colour, pygame.Rect(0, 0, 1300, 800))
 		pygame.draw.rect(window_data.window, ('aquamarine2'), pygame.Rect(0, 700, 1300, 100))
 
 		# Add new snake block in the direction of movement and remove last block
-		snek_data.snek_body.insert(0, list(snek_data.snek_head))
-		snek_data.snek_body.pop()
+		snek_data.body.insert(0, list(snek_data.head))
+		snek_data.body.pop()
 
 		# Checks if theres an active food if not generates a new one within the window
 		if snack_spawned == False:
 			snack_pos = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
 			snack_spawned = True
+		
+		# Check for self collision
+		if snek_data.head in snek_data.body[1::]:
+			dead = True
 
-		# Displays the score
-		score_board(window_data, score)
+		# Check for wall collision
+		if snek_data.head in wall.cords:
+			dead = True
 
 		# Grow snek when colliding with food
-		if snek_data.snek_head == snack_pos:
+		if snek_data.head == snack_pos:
 			score += 1
 			grow_tail(snek_data)
 			snack_spawned = False
 
-		# Check for self collision
-		if snek_data.snek_head in snek_data.snek_body[1::]:
-			dead = True
 
-		# Rendering snake and snacks
-		for pos in snek_data.snek_body:
-			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
-		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.snek_block_size, snek_data.snek_block_size))
+		### RENDERS, MOVE TO A DIFFERENT FILE
+		# Rendering snake
+		for pos in snek_data.body:
+			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.block_size, snek_data.block_size))
+		
+		# Rendering snack
+		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.block_size, snek_data.block_size))
+		
+		# Rendering wall
+		for pos in wall.cords:
+			pygame.draw.rect(window_data.window, wall.colour, pygame.Rect((pos[0], pos[1]), (wall.size, wall.size)))
 
 		# Breaks the loops and shows end screen when pressed
 		if exit_button.draw(window_data.window):
 			dead = True
+		
+		# Displays the score
+		score_board(window_data, score)
 
-	#  If you suck at the game you end up here
+	# Not so good players end up here...
 	if dead:
 		end_screen(window_data, score)
