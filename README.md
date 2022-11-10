@@ -10,12 +10,12 @@ Purpose of the project personally is to learn more python, pygame library and th
 	pygame (version?)
 
 # Usage
-to launch the game, go to the root of the directory and type
+To launch the game, go to the root of the directory and type
 	`python main.py`
 
 # Working on:
 
-	Walls
+	Walls and file reorganization
 
 # Todo:
 
