@@ -1,4 +1,4 @@
-# SNAKE GAME PROJECT (AAA game btw)
+# Snake game project (AAA game btw, almost...)
 
 Idea is simple. 
 Reproduce the good old snake game with some modifications.
