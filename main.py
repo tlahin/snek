@@ -32,7 +32,7 @@ options_button = classes.text_button(window_data.width / 2 - 100, window_data.he
 quit_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struck: (snek, background, food)
-colour_settings = classes.colour_settings(('black'), ('gray'), ('red'))
+colour_settings = classes.colour_settings(('white'), ('black'), ('green'))
 
 # Snek struct: (speed, block size, head cords, body cords)
 snek_data = classes.snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
