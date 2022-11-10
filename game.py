@@ -1,6 +1,5 @@
 
 import pygame
-import random
 
 import classes
 import game_objects
@@ -97,18 +96,13 @@ def play(snek_data, colour_settings, window_data):
 	exit_button = classes.exit_button(1225, 725, exit_img)
 
 	dead = False
-	snack_spawned = False
 	new_direction = 'LEFT'
 	current_direction = new_direction
 	fps = pygame.time.Clock()
 	score = 0
 
-	# wall
-	start_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
-	wall_cords = [[start_cords[0], start_cords[1]]]
-	# Wall (window_data, size, length, colour)
-	wall = classes.wall_struct(wall_cords, 5, snek_data.block_size, 'red')
-	game_objects.walls(wall, snek_data)
+	wall = game_objects.spawn_wall(snek_data, window_data)
+	snack = game_objects.spawn_snack(snek_data, window_data, wall)
 
 	while not dead:
 
@@ -137,7 +131,7 @@ def play(snek_data, colour_settings, window_data):
 					grow_tail(snek_data)
 				# debug functionality | respawns food when pressing 'h'
 				if event.key == pygame.K_h:
-					snack_spawned = False
+					snack.spawned = False
 
 		# Prevents the snek from going backwards
 		if current_direction == 'UP' and new_direction != 'DOWN':
@@ -178,10 +172,9 @@ def play(snek_data, colour_settings, window_data):
 		snek_data.body.pop()
 
 		# Checks if theres an active food if not generates a new one within the window
-		if snack_spawned == False:
-			snack_pos = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
-			snack_spawned = True
-		
+		if snack.spawned is False:
+			game_objects.update_snack(snack, window_data)
+
 		# Check for self collision
 		if snek_data.head in snek_data.body[1::]:
 			dead = True
@@ -191,11 +184,10 @@ def play(snek_data, colour_settings, window_data):
 			dead = True
 
 		# Grow snek when colliding with food
-		if snek_data.head == snack_pos:
+		if snek_data.head == snack.cords:
 			score += 1
 			grow_tail(snek_data)
-			snack_spawned = False
-
+			snack.spawned = False
 
 		### RENDERS, MOVE TO A DIFFERENT FILE
 		# Rendering snake
@@ -203,7 +195,7 @@ def play(snek_data, colour_settings, window_data):
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.block_size, snek_data.block_size))
 		
 		# Rendering snack
-		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack_pos[0], snack_pos[1], snek_data.block_size, snek_data.block_size))
+		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack.cords[0], snack.cords[1], snek_data.block_size, snek_data.block_size))
 		
 		# Rendering wall
 		for pos in wall.cords:
