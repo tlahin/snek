@@ -17,8 +17,7 @@ window_data = classes.window_stuct(1300, 800)
 
 # Main menu background img
 snek_img = pygame.image.load("./recources/snek_bg.png").convert_alpha()
-
-
+snek_img = pygame.transform.scale(snek_img, (600, 600))
 
 # Main menu background
 bg_main_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')
@@ -28,9 +27,9 @@ fontsmall = pygame.font.SysFont('Arial', 40)
 fontbig = pygame.font.SysFont('Arial', 80)
 
 # Main menu buttons
-start_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 - 55, 100, 50, "START", pygame.font.SysFont(None, 50))
-options_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
-quit_button = classes.text_button(window_data.width / 2 - 100 / 2, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
+start_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2 - 55, 100, 50, "START", pygame.font.SysFont(None, 50))
+options_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
+quit_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struck: (snek, background, food)
 colour_settings = classes.colour_settings(('black'), ('gray'), ('red'))
@@ -47,11 +46,12 @@ while running:
 
 	# Main menu background
 	window_data.window.blit(bg_main_menu.surface, (0, 0))
-	window_data.window.blit(snek_img, (550, 140))
+	window_data.window.blit(snek_img, (400, 85))
 
 	# Main menu title
-	main_menu = fontbig.render('SNEK', True , ('black'))
-	window_data.window.blit(main_menu, (window_data.width / 2 - 110, 50))
+	snek_title = fontbig.render('SNEK', True , ('black'))
+	title_rect = snek_title.get_rect(center=(window_data.width / 2, 50))
+	window_data.window.blit(snek_title, title_rect)
 
 	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
