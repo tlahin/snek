@@ -17,7 +17,7 @@ window_data = classes.window_stuct(1300, 800)
 
 # Main menu background img
 snek_img = pygame.image.load("./resources/snek_bg.png").convert_alpha()
-snek_img = pygame.transform.scale(snek_img, (600, 600))
+snek_img = pygame.transform.scale(snek_img, (700, 600))
 
 # Main menu background
 bg_main_menu = classes.background(window_data.width, window_data.height, 'aquamarine2')

@@ -12,16 +12,34 @@ def spawn_wall(snek_data, window_data):
     # Walls cordinate list
     wall_cords = [[start_cords[0], start_cords[1]]]
 
-	# Wall (window_data, size, length, colour)
-    wall = classes.wall_struct(wall_cords, 5, snek_data.block_size, 'red')
-    
-    j = 0
-    while j < wall.length:
-        new_block = wall.cords[j].copy()
-        for i in range(len(new_block)):
-            new_block[i] += snek_data.block_size
-        wall.cords.append(new_block)
-        j += 1
+    # Random length for the wall
+    nbr_of_line = random.randint(6, 10)
+    line_len = random.randint(10, 14)
+
+	# Wall (window_data, size, colour)
+    wall = classes.wall_struct(wall_cords, nbr_of_line * line_len, snek_data.block_size, 'red')
+
+    # Loops for each line and increments the 'block line' towards a random direction
+    # and adds the element to wall.cords list
+    i = 0
+    while i < nbr_of_line:
+        direction = random.choice(['N','E','S','W'])
+        j = 0
+        while j < line_len:
+            new_block = wall.cords[-1].copy()
+            match direction:
+                case 'N':
+                    new_block[1] -= 10
+                case 'E':
+                    new_block[0] += 10
+                case 'S':
+                    new_block[1] -= 10
+                case 'W':
+                    new_block[0] -= 10
+            if new_block not in wall.cords:
+                wall_cords.append(new_block)
+            j += 1
+        i += 1
     return wall
 
 # Initial spawn location and creation of the snack struct
