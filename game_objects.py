@@ -6,14 +6,17 @@ import classes
 # needs some sort of pattern not just the same staircase everytime...
 def spawn_wall(snek_data, window_data):
 
+    # Starting cordinates for the wall
     start_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+    
+    # Walls cordinate list
     wall_cords = [[start_cords[0], start_cords[1]]]
+
 	# Wall (window_data, size, length, colour)
     wall = classes.wall_struct(wall_cords, 5, snek_data.block_size, 'red')
+    
     j = 0
-
     while j < wall.length:
-
         new_block = wall.cords[j].copy()
         for i in range(len(new_block)):
             new_block[i] += snek_data.block_size
