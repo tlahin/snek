@@ -43,7 +43,15 @@ def options(snek_data, colour_settings, window_data):
 					pygame.font.SysFont(None, 30),
 					"Background colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 
+	# Wall dropdown
+
 	running = True
+	wall_colour_list = classes.DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					800, 350, 200, 50,
+					pygame.font.SysFont(None, 30),
+					"Wall colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
 
 	while running:
 
@@ -71,6 +79,9 @@ def options(snek_data, colour_settings, window_data):
 		# Showcases the colour above background colour menu
 		pygame.draw.rect(window_data.window, colour_settings.background_colour, pygame.Rect(640, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
+		#  Showcases the colour above wall colour menu
+		pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect(890, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+
 		# updates the dropdown menu and changes the colour of the snek
 		snek_colour_selected = snek_colour_list.update(event_list)
 		if snek_colour_selected >= 0:
@@ -89,10 +100,17 @@ def options(snek_data, colour_settings, window_data):
 			background_colour_list.main = background_colour_list.options[background_colour_selected]
 			colour_settings.background_colour = background_colour_list.options[background_colour_selected]
 
+		# updates the downdown menu and changes the colour of the wall
+		wall_colour_selected = wall_colour_list.update(event_list)
+		if wall_colour_selected >= 0:
+			wall_colour_list.main = wall_colour_list.options[wall_colour_selected]
+			colour_settings.wall_colour = wall_colour_list.options[wall_colour_selected]
+
 		# Draws the dropdown menus
 		snek_colour_list.draw(window_data.window)
 		food_colour_list.draw(window_data.window)
 		background_colour_list.draw(window_data.window)
+		wall_colour_list.draw(window_data.window)
 
 		# Draws the exit button
 		if exit_button.draw(window_data.window):
