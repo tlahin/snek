@@ -15,13 +15,15 @@ To launch the game, go to the root of the directory and type
 
 # Working on:
 
-	Walls and file reorganization
+	- Improving the wall generating algo
+	- Difficulty (Game play, Options menu)
 
 # Todo:
 
-	- Add walls the snake has to avoid or else it dies
+	- Different difficulties(?)
 	- Powerups such as speed or immunity
 	- AI to play the game itself
+	- 'Tron' mode against AI snek
 
 # Controls:
 
