@@ -36,6 +36,7 @@ To launch the game, go to the root of the directory and type
 	debug:
 		'g' to grow
 		'h' to respawn food
+		'j' to respawn wall
 
 # Authors:
 	
