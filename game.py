@@ -202,7 +202,7 @@ def play(snek_data, colour_settings, window_data):
 		
 		# Rendering wall
 		for pos in wall.cords:
-			pygame.draw.rect(window_data.window, wall.colour, pygame.Rect((pos[0], pos[1]), (wall.size, wall.size)))
+			pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect((pos[0], pos[1]), (wall.size, wall.size)))
 
 		# Breaks the loops and shows end screen when pressed
 		if exit_button.draw(window_data.window):

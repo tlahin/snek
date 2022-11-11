@@ -81,11 +81,12 @@ class colour_button():
 # Settings for the gameloop
 class colour_settings():
 
-	def __init__(self, snek_colour, background_colour, food_colour):
+	def __init__(self, snek_colour, background_colour, food_colour, wall_colour):
 
 		self.snek_colour = snek_colour
 		self.background_colour = background_colour
 		self.food_colour = food_colour
+		self.wall_colour = wall_colour
 
 # Struct that carries sneks data
 class snek_struct():
@@ -167,20 +168,18 @@ class exit_button():
 # Create walls
 class wall_struct():
 
-	def __init__(self, wall_cords, length, size, colour):
+	def __init__(self, wall_cords, length, size):
 		
 		self.cords = wall_cords
 		self.length = length
 		self.size = size
-		self.colour = colour
 
 # Create snacks
 class snack_struct():
 
-	def __init__(self, snack_cords, size, colour, spawned, wall):
+	def __init__(self, snack_cords, size, spawned, wall):
 		
 		self.cords = snack_cords
 		self.size = size
-		self.colour = colour
 		self.spawned = spawned
 		self.wall = wall
