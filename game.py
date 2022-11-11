@@ -132,6 +132,9 @@ def play(snek_data, colour_settings, window_data):
 				# debug functionality | respawns food when pressing 'h'
 				if event.key == pygame.K_h:
 					snack.spawned = False
+				# debug functionaluty | respawns the wall when pressing 'j'
+				if event.key == pygame.K_j:
+					wall = game_objects.spawn_wall(snek_data, window_data)
 
 		# Prevents the snek from going backwards
 		if current_direction == 'UP' and new_direction != 'DOWN':
