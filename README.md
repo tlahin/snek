@@ -15,7 +15,7 @@ To launch the game, go to the root of the directory and type
 
 # Working on:
 
-	- Improving the wall generating algo
+	- Improving and fixing the wall generating algo
 	- Difficulty (Gameplay, Options menu)
 
 # Todo:
