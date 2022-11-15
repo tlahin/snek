@@ -6,7 +6,7 @@ Purpose of the project personally is to learn more python, pygame library and th
 
 # Requirements
 
-	python (version?)
+	python (3.10)
 	pygame (version?)
 
 # Usage
