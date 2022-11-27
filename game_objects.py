@@ -44,6 +44,7 @@ def spawn_wall(snek_data, window_data):
                 new_block[1] = window_data.game_height - wall.size
             elif new_block[1] > window_data.game_height:
                 new_block[1] = 0
+            # Food doesn't spawn inside a wall
             if new_block not in wall.cords:
                 wall_cords.append(new_block)
             j += 1
