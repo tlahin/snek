@@ -19,7 +19,9 @@ To launch the game, go to the root of the directory and type
 	- Difficulty (Gameplay, Options menu)
 
 # Todo:
-
+	
+	- Options/Difficulty menu emojis/text/cleanup
+	- Implement respawning walls when you eat snack on mythic difficulty
 	- Powerups such as speed or immunity
 	- AI to play the game itself
 	- 'Tron' mode against AI snek
