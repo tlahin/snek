@@ -20,7 +20,6 @@ To launch the game, go to the root of the directory and type
 
 # Todo:
 
-	- Different difficulties(?)
 	- Powerups such as speed or immunity
 	- AI to play the game itself
 	- 'Tron' mode against AI snek
