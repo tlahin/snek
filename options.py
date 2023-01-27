@@ -9,7 +9,7 @@ COLOR_LIST_INACTIVE = ('aquamarine2')
 COLOR_LIST_ACTIVE = ('aquamarine')
 
 # Options menu
-def options(snek_data, colour_settings, window_data):
+def options(snek_data, colour_settings, window_data, difficulty_settings):
 
 	# Exit button and it's image
 	exit_img = pygame.image.load("./resources/exit_button.png").convert_alpha()
@@ -23,35 +23,43 @@ def options(snek_data, colour_settings, window_data):
 	snek_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
-					50, 350, 200, 50,
+					10, 350, 200, 50,
 					pygame.font.SysFont(None, 30),
-					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])\
+					"Snek colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"])\
 
 	# Food dropdown
 	food_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
-					300, 350, 200, 50,
+					215, 350, 200, 50,
 					pygame.font.SysFont(None, 30),
-					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
+					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"])
 
 	# Background dropdown
 	background_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
-					550, 350, 200, 50,
+					425, 350, 200, 50,
 					pygame.font.SysFont(None, 30),
-					"Background colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
+					"Background colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"])
 
 	# Wall dropdown
-
-	running = True
 	wall_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
-					800, 350, 200, 50,
+					635, 350, 200, 50,
 					pygame.font.SysFont(None, 30),
-					"Wall colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow"])
+					"Wall colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"])
+
+	# Difficulty dropdown
+	difficulty_list = classes.DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					855, 350, 200, 50,
+					pygame.font.SysFont(None, 30),
+					"Difficulty", ["Normal", "Heroic", "Mythic"])
+
+	running = True
 
 	while running:
 
@@ -71,16 +79,19 @@ def options(snek_data, colour_settings, window_data):
 		window_data.window.blit(options_menu, (window_data.width / 2 - 150, 25))
 
 		# Showcases the colour above snek colour menu
-		pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(140, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(95, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
 		# Showcases the colour above food colour menu
-		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(390, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(305, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
 		# Showcases the colour above background colour menu
-		pygame.draw.rect(window_data.window, colour_settings.background_colour, pygame.Rect(640, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+		pygame.draw.rect(window_data.window, colour_settings.background_colour, pygame.Rect(515, 300, snek_data.block_size * 2, snek_data.block_size * 2))
 
-		#  Showcases the colour above wall colour menu
-		pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect(890, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+		# Showcases the colour above wall colour menu
+		pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect(725, 300, snek_data.block_size * 2, snek_data.block_size * 2))
+
+		# Showcases the difficulty above the difficulty menu
+		# put an evil emoji corresponding to the difficulty?
 
 		# updates the dropdown menu and changes the colour of the snek
 		snek_colour_selected = snek_colour_list.update(event_list)
@@ -106,11 +117,18 @@ def options(snek_data, colour_settings, window_data):
 			wall_colour_list.main = wall_colour_list.options[wall_colour_selected]
 			colour_settings.wall_colour = wall_colour_list.options[wall_colour_selected]
 
+		# updates the downdown menu and changes the game difficulty
+		difficlty_selected = difficulty_list.update(event_list)
+		if difficlty_selected >= 0:
+			difficulty_list.main = difficulty_list.options[difficlty_selected]
+			difficulty_settings.difficulty = difficulty_list.options[difficlty_selected]
+
 		# Draws the dropdown menus
 		snek_colour_list.draw(window_data.window)
 		food_colour_list.draw(window_data.window)
 		background_colour_list.draw(window_data.window)
 		wall_colour_list.draw(window_data.window)
+		difficulty_list .draw(window_data.window)
 
 		# Draws the exit button
 		if exit_button.draw(window_data.window):

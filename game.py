@@ -67,19 +67,22 @@ def pause_game(window_data, exit_button):
 	return True
 
 # Renders score at the bottom of the screen, updates it in real time
-def score_board(window_data, score):
+def score_board(window_data, score, difficulty_settings):
 
 	# Text font
-	score_font = pygame.font.SysFont('Arial', 80)
+	board_font = pygame.font.SysFont('Arial', 80)
 
 	# Content
-	score_surface = score_font.render('Punttos: ' + str(score), True, ('black'))
+	score_surface = board_font.render('Punttos: ' + str(score), True, ('black'))
+	difficulty_surface = board_font.render('Difficulty: ' + str(difficulty_settings.difficulty), True, ('black'))
 
 	# Board rect
-	score_rect = pygame.Rect(5, 705, 1300, 700)
+	score_rect = pygame.Rect(5, 705, 800, 700)
+	difficulty_rect = pygame.Rect(600, 705, 500, 700)
 
 	# Draws the rect with the content
 	window_data.window.blit(score_surface, score_rect)
+	window_data.window.blit(difficulty_surface, difficulty_rect)
 
 # Grow snek
 def grow_tail(snek_data):
@@ -88,7 +91,7 @@ def grow_tail(snek_data):
 	snek_data.body.append([-10, -10])
 
 # Game loop
-def play(snek_data, colour_settings, window_data):
+def play(snek_data, colour_settings, window_data, difficulty_settings):
 
 	# Exit button and it's image
 	exit_img = pygame.image.load("./resources/exit_button.png").convert_alpha()
@@ -188,6 +191,9 @@ def play(snek_data, colour_settings, window_data):
 
 		# Grow snek when colliding with food
 		if snek_data.head == snack.cords:
+			# Increases the speed depending on the difficulty
+			if (difficulty_settings.difficulty != 'Normal'):
+				snek_data.speed += 5
 			score += 1
 			grow_tail(snek_data)
 			snack.spawned = False
@@ -196,10 +202,10 @@ def play(snek_data, colour_settings, window_data):
 		# Rendering snake
 		for pos in snek_data.body:
 			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.block_size, snek_data.block_size))
-		
+
 		# Rendering snack
 		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack.cords[0], snack.cords[1], snek_data.block_size, snek_data.block_size))
-		
+
 		# Rendering wall
 		for pos in wall.cords:
 			pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect((pos[0], pos[1]), (wall.size, wall.size)))
@@ -207,9 +213,9 @@ def play(snek_data, colour_settings, window_data):
 		# Breaks the loops and shows end screen when pressed
 		if exit_button.draw(window_data.window):
 			dead = True
-		
-		# Displays the score
-		score_board(window_data, score)
+
+		# Displays the score and difficulty
+		score_board(window_data, score, difficulty_settings)
 
 	# Not so good players end up here...
 	if dead:

@@ -88,6 +88,12 @@ class colour_settings():
 		self.food_colour = food_colour
 		self.wall_colour = wall_colour
 
+# Difficulty settings of the game
+class difficulty_settings():
+	def __init__(self, difficulty):
+
+		self.difficulty = difficulty
+
 # Struct that carries sneks data
 class snek_struct():
 
@@ -169,7 +175,7 @@ class exit_button():
 class wall_struct():
 
 	def __init__(self, wall_cords, length, size):
-		
+
 		self.cords = wall_cords
 		self.length = length
 		self.size = size
@@ -178,7 +184,7 @@ class wall_struct():
 class snack_struct():
 
 	def __init__(self, snack_cords, size, spawned, wall):
-		
+
 		self.cords = snack_cords
 		self.size = size
 		self.spawned = spawned

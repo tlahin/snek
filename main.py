@@ -31,8 +31,11 @@ start_button = classes.text_button(window_data.width / 2 - 100, window_data.heig
 options_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2, 100, 50, "OPTIONS", pygame.font.SysFont(None, 50))
 quit_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
-# Settings struck: (snek, background, food)
+# Settings struct: (snek, background, food)
 colour_settings = classes.colour_settings('white', 'black', 'green', 'red')
+
+# Difficulty struct
+difficulty_settings = classes.difficulty_settings('Normal')
 
 # Snek struct: (speed, block size, head cords, body cords)
 snek_data = classes.snek_struct(10, 10, [510, 500], [[510, 500], [520, 500], [530, 500]])
@@ -56,11 +59,11 @@ while running:
 	# Start button to play the game | resets the game before playing
 	if start_button.draw(window_data.window):
 		game.reset_data(snek_data)
-		game.play(snek_data, colour_settings, window_data)
+		game.play(snek_data, colour_settings, window_data, difficulty_settings)
 
 	# Options button in main menu to open options menu
 	if options_button.draw(window_data.window):
-		options.options(snek_data, colour_settings, window_data)
+		options.options(snek_data, colour_settings, window_data, difficulty_settings)
 
 	# Quit button to close the game
 	if quit_button.draw(window_data.window):
