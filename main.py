@@ -53,7 +53,7 @@ while running:
 
 	# Main menu title
 	snek_title = fontbig.render('SNEK', True , ('black'))
-	title_rect = snek_title.get_rect(center=(window_data.width / 2, 50))
+	title_rect = snek_title.get_rect(center=(window_data.width / 2, 100))
 	window_data.window.blit(snek_title, title_rect)
 
 	# Start button to play the game | resets the game before playing
