@@ -1,6 +1,6 @@
 # Snake game project (AAA game btw, almost...)
 
-Idea is simple. 
+Idea is simple.
 Reproduce the good old snake game with some modifications.
 Purpose of the project personally is to learn more python, pygame library and the syntax in general aswell as to see if I can actually code something on my own besides school work 😄. A fellow contributor [Poks](github.com/pokspoks) helps me here and there with some of the problems I face during the journey.
 
@@ -19,9 +19,8 @@ To launch the game, go to the root of the directory and type
 	- Difficulty (Gameplay, Options menu)
 
 # Todo:
-	
-	- Options/Difficulty menu emojis/text/cleanup
-	- Implement respawning walls when you eat snack on mythic difficulty
+
+	- In options menu, add emojis/cooler text for difficulty dropdown
 	- Powerups such as speed or immunity
 	- AI to play the game itself
 	- 'Tron' mode against AI snek
@@ -30,7 +29,7 @@ To launch the game, go to the root of the directory and type
 
 	Move:
 		'wasd' or arrow keys
-		
+
 	Pause/unpause:
 		'space'
 
@@ -40,6 +39,6 @@ To launch the game, go to the root of the directory and type
 		'j' to respawn wall
 
 # Authors:
-	
+
 [Tlahin](github.com/tlahin) and [Poks](github.com/pokspoks)
 

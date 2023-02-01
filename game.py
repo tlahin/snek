@@ -194,6 +194,8 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 			# Increases the speed depending on the difficulty
 			if (difficulty_settings.difficulty != 'Normal'):
 				snek_data.speed += 5
+			if (difficulty_settings.difficulty == 'Mythic'):
+				wall = game_objects.spawn_wall(snek_data, window_data)
 			score += 1
 			grow_tail(snek_data)
 			snack.spawned = False
