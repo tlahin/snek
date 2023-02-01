@@ -192,9 +192,9 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 		# Grow snek when colliding with food
 		if snek_data.head == snack.cords:
 			# Increases the speed depending on the difficulty
-			if (difficulty_settings.difficulty != 'Normal'):
+			if (difficulty_settings.difficulty != 'Giga Easy'):
 				snek_data.speed += 5
-			if (difficulty_settings.difficulty == 'Mythic'):
+			if (difficulty_settings.difficulty == 'Turbo Hard'):
 				wall = game_objects.spawn_wall(snek_data, window_data)
 			score += 1
 			grow_tail(snek_data)

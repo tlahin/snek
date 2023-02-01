@@ -57,7 +57,7 @@ def options(snek_data, colour_settings, window_data, difficulty_settings):
 					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
 					855, 350, 200, 50,
 					pygame.font.SysFont(None, 30),
-					"Difficulty", ["Normal", "Heroic", "Mythic"])
+					"Difficulty", ["Giga Easy", "Mega Normal", "Turbo Hard"])
 
 	running = True
 
