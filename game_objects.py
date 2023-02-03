@@ -71,3 +71,21 @@ def update_snack(snack, window_data):
 	if i not in snack.wall.cords:
 		snack.cords = i
 	snack.spawned = True
+
+# initial spawn location and creation of the power_up struct
+def spawn_power_up(snek_data, window_data, wall):
+
+	# random power int(1-2)
+	power = random.randint(1, 2)
+	starting_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	power_up = classes.power_up_struct(starting_cords, snek_data.block_size, False, wall, power)
+	return power_up
+
+# Spawns a new power up at a random location
+def update_power_up(power_up, window_data):
+
+	i = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	# Makes sure power_up doesnt spawn on top of a wall
+	if i not in power_up.wall.cords:
+		power_up.cords = i
+	power_up.spawned = True

@@ -106,6 +106,7 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 
 	wall = game_objects.spawn_wall(snek_data, window_data)
 	snack = game_objects.spawn_snack(snek_data, window_data, wall)
+	power_up = game_objects.spawn_power_up(snek_data, window_data, wall)
 
 	while not dead:
 
@@ -181,13 +182,21 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 		if snack.spawned is False:
 			game_objects.update_snack(snack, window_data)
 
+		# Check if theres an active power up and if you're eligible for a new one (every 5 points) if not generates new within the window
+		if snack.spawned is False and (score % 5 == 0):
+			game_objects.update_power_up(power_up, window_data)
+
 		# Check for self collision
 		if snek_data.head in snek_data.body[1::]:
 			dead = True
 
 		# Check for wall collision
 		if snek_data.head in wall.cords:
-			dead = True
+			if snek_data.shield == True:
+				snek_data.shield = False
+				wall = game_objects.spawn_wall(snek_data, window_data)
+			else:
+				dead = True
 
 		# Grow snek when colliding with food
 		if snek_data.head == snack.cords:
@@ -199,6 +208,15 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 			score += 1
 			grow_tail(snek_data)
 			snack.spawned = False
+
+		# Apply the power up when colliding with it
+		if snek_data.head == power_up.cords:
+				# 1 for slow
+				if (power_up.power_type == 1):
+					snek_data.speed -= 5
+				# 2 for shield
+				elif (power_up.power_type == 2):
+					snek_data.shield = True
 
 		### RENDERS, MOVE TO A DIFFERENT FILE
 		# Rendering snake

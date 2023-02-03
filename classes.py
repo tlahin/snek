@@ -103,6 +103,7 @@ class snek_struct():
 		self.block_size = snek_block_size
 		self.head = snek_head
 		self.body = snek_body
+		self.shield = False
 
 # Struct that carries window data
 class window_stuct():
@@ -189,3 +190,15 @@ class snack_struct():
 		self.size = size
 		self.spawned = spawned
 		self.wall = wall
+
+# Create power ups
+class power_up_struct():
+
+	def __init__(self, power_up_cords, size, spawned, wall, power):
+
+		self.cords = power_up_cords
+		self.size = size
+		self.spawned = spawned
+		self.wall = wall
+		self.power_type = power
+

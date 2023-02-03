@@ -20,8 +20,9 @@ To launch the game, go to the root of the directory and type
 
 # Todo:
 
+	- make sure power ups dont over lap with snacks and otherway around
 	- In options menu, add emojis/cooler text for difficulty dropdown
-	- Powerups such as speed or immunity
+	- Powerups such as speed/slow or immunity
 	- AI to play the game itself
 	- 'Tron' mode against AI snek
 
