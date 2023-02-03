@@ -32,7 +32,7 @@ options_button = classes.text_button(window_data.width / 2 - 100, window_data.he
 quit_button = classes.text_button(window_data.width / 2 - 100, window_data.height / 2 + 55, 100, 50, "QUIT", pygame.font.SysFont(None, 50))
 
 # Settings struct: (snek, background, food)
-colour_settings = classes.colour_settings('white', 'black', 'green', 'red')
+colour_settings = classes.colour_settings('white', 'black', 'green', 'red', 'yellow')
 
 # Difficulty struct
 difficulty_settings = classes.difficulty_settings('Normal')

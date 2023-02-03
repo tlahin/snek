@@ -81,12 +81,13 @@ class colour_button():
 # Settings for the gameloop
 class colour_settings():
 
-	def __init__(self, snek_colour, background_colour, food_colour, wall_colour):
+	def __init__(self, snek_colour, background_colour, food_colour, wall_colour, power_up_colour):
 
 		self.snek_colour = snek_colour
 		self.background_colour = background_colour
 		self.food_colour = food_colour
 		self.wall_colour = wall_colour
+		self.power_up_colour = power_up_colour
 
 # Difficulty settings of the game
 class difficulty_settings():
