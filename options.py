@@ -35,6 +35,14 @@ def options(snek_data, colour_settings, window_data, difficulty_settings):
 					pygame.font.SysFont(None, 30),
 					"Food colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"])
 
+	""" # Power_up dropdown
+	Power_up_colour_list = classes.DropDown(
+					[COLOR_INACTIVE, COLOR_ACTIVE],
+					[COLOR_LIST_INACTIVE, COLOR_LIST_ACTIVE],
+					215, 350, 200, 50,
+					pygame.font.SysFont(None, 30),
+					"Power up colour", ["white", "cyan", "pink", "blue", "red", "green", "yellow", "black"]) """
+
 	# Background dropdown
 	background_colour_list = classes.DropDown(
 					[COLOR_INACTIVE, COLOR_ACTIVE],
