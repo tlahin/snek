@@ -184,7 +184,7 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 			game_objects.update_snack(snack, window_data)
 
 		# Check if theres an active power up and if you're eligible for a new one (every 5 points) if not generates new within the window
-		if snack.spawned is False and (score % 5 == 0):
+		if power_up.spawned is False and (score % 5 == 0):
 			game_objects.update_power_up(power_up, window_data)
 
 		# Check for self collision
@@ -218,6 +218,7 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 				# 2 for shield
 				elif (power_up.power_type == 2):
 					snek_data.shield = True
+				power_up.spawned = False
 
 		### RENDERS, MOVE TO A DIFFERENT FILE
 		# Rendering snake
