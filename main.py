@@ -13,7 +13,7 @@ pygame.init()
 pygame.display.set_caption("Epic Game")
 
 # Window struct, carries width, height and the window surface
-window_data = classes.window_stuct(1300, 800)
+window_data = classes.window_struct(1300, 800)
 
 # Main menu background img
 snek_img = pygame.image.load("./resources/snek_bg.png").convert_alpha()

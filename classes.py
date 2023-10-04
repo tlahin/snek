@@ -107,7 +107,7 @@ class snek_struct():
 		self.shield = False
 
 # Struct that carries window data
-class window_stuct():
+class window_struct():
 
 	def __init__(self, width, height):
 
