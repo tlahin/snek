@@ -16,7 +16,7 @@ pygame.display.set_caption("Epic Game")
 window_data = classes.window_struct(1300, 800)
 
 # Main menu background img
-snek_img = pygame.image.load("./resources/snek_bg.png").convert_alpha()
+snek_img = pygame.image.load("../resources/snek_bg.png").convert_alpha()
 snek_img = pygame.transform.scale(snek_img, (500, 400))
 
 # Main menu background

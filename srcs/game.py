@@ -95,7 +95,7 @@ def grow_tail(snek_data):
 def play(snek_data, colour_settings, window_data, difficulty_settings):
 
 	# Exit button and it's image
-	exit_img = pygame.image.load("./resources/exit_button.png").convert_alpha()
+	exit_img = pygame.image.load("../resources/exit_button.png").convert_alpha()
 	exit_img = pygame.transform.scale(exit_img, (50, 50))
 	exit_button = classes.exit_button(1225, 725, exit_img)
 
