@@ -2,12 +2,20 @@ import random
 
 import classes
 
+# Returns a random location on the game area that is not inside the snek itself
+def get_random_cords(snek_data, window_data):
+
+	cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	while cords in snek_data.body:
+		cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	return (cords)
+
 # Creates the wall struct and calculates its position to wall.cords
 # needs some sort of pattern not just the same staircase everytime...
 def spawn_wall(snek_data, window_data):
 
 	# Starting cordinates for the wall
-	start_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	start_cords = get_random_cords(snek_data, window_data)
 
 	# Walls cordinate list
 	wall_cords = [[start_cords[0], start_cords[1]]]
@@ -57,35 +65,37 @@ def spawn_wall(snek_data, window_data):
 	return wall
 
 # Initial spawn location and creation of the snack struct
-def spawn_snack(snek_data, window_data, wall):
+def spawn_snack(snek_data, window_data):
 
-	starting_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
-	snack = classes.snack_struct(starting_cords, snek_data.block_size, False, wall)
+	starting_cords = get_random_cords(snek_data, window_data)
+	snack = classes.snack_struct(starting_cords, snek_data.block_size, False)
 	return snack
 
 # Spawns a new snack at a new random location
-def update_snack(snack, window_data):
+def update_snack(snek_data, window_data, snack, wall):
 
-	i = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
-	# Makes sure snack cannot spawn on top of a wall
-	if i not in snack.wall.cords:
-		snack.cords = i
+	new_snack_cords = get_random_cords(snek_data, window_data)
+	# Makes sure snack cannot spawn on top of other game objects
+	while new_snack_cords in wall.cords:
+		new_snack_cords = get_random_cords(snek_data, window_data)
+	snack.cords = new_snack_cords
 	snack.spawned = True
 
 # initial spawn location and creation of the power_up struct
-def spawn_power_up(snek_data, window_data, wall):
+def spawn_power_up(snek_data, window_data):
 
+	starting_cords = get_random_cords(snek_data, window_data)
 	# random power int(1-2)
-	power = random.randint(1, 2)
-	starting_cords = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
-	power_up = classes.power_up_struct(starting_cords, snek_data.block_size, False, wall, power)
+	power_type = random.randint(1, 2)
+	power_up = classes.power_up_struct(starting_cords, snek_data.block_size, False, power_type)
 	return power_up
 
 # Spawns a new power up at a random location
-def update_power_up(power_up, window_data):
+def update_power_up(snek_data, window_data, wall, power_up, snack):
 
-	i = [random.randint(0, window_data.width / 10 - 10) * 10, random.randint(0, window_data.height / 10 - 11) * 10]
+	new_power_up_cords = get_random_cords(snek_data, window_data)
 	# Makes sure power_up doesnt spawn on top of a wall
-	if i not in power_up.wall.cords:
-		power_up.cords = i
+	while new_power_up_cords in snack.cords or new_power_up_cords in wall.cords:
+		new_power_up_cords = get_random_cords(snek_data, window_data)
+	power_up.cords = new_power_up_cords
 	power_up.spawned = True

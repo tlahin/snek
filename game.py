@@ -3,6 +3,7 @@ import pygame
 
 import classes
 import game_objects
+import render
 
 # Resets snek data to default starting position
 def reset_data(snek_data):
@@ -28,7 +29,7 @@ def end_screen(window_data, score):
 
 	# Shows the finals score at the end screen and trash talks the player
 	end_score_font = pygame.font.SysFont('Arial', 80)
-	end_score_font = end_score_font.render("Only got " + str(score) + " punttos ._.", True, ('black'))
+	end_score_font = end_score_font.render("Only got " + str(score) + " points ._.", True, ('black'))
 	end_score_rect = end_score_font.get_rect()
 	end_score_rect.midtop = (window_data.width / 2, window_data.height / 4)
 	window_data.window.blit(end_score_font, end_score_rect)
@@ -73,7 +74,7 @@ def score_board(window_data, score, difficulty_settings):
 	board_font = pygame.font.SysFont('Arial', 80)
 
 	# Content
-	score_surface = board_font.render('Punttos: ' + str(score), True, ('black'))
+	score_surface = board_font.render('Points: ' + str(score), True, ('black'))
 	difficulty_surface = board_font.render('Difficulty: ' + str(difficulty_settings.difficulty), True, ('black'))
 
 	# Board rect
@@ -105,9 +106,10 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 	score = 0
 	snek_data.speed = 10
 
+	# Generate game objects
 	wall = game_objects.spawn_wall(snek_data, window_data)
-	snack = game_objects.spawn_snack(snek_data, window_data, wall)
-	power_up = game_objects.spawn_power_up(snek_data, window_data, wall)
+	snack = game_objects.spawn_snack(snek_data, window_data)
+	power_up = game_objects.spawn_power_up(snek_data, window_data)
 
 	while not dead:
 
@@ -181,11 +183,11 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 
 		# Checks if theres an active food if not generates a new one within the window
 		if snack.spawned is False:
-			game_objects.update_snack(snack, window_data)
+			game_objects.update_snack(snek_data, window_data, snack, wall)
 
 		# Check if theres an active power up and if you're eligible for a new one (every 5 points) if not generates new within the window
 		if power_up.spawned is False and (score % 5 == 0):
-			game_objects.update_power_up(power_up, window_data)
+			game_objects.update_power_up(snek_data, window_data, wall, power_up, snack)
 
 		# Check for self collision
 		if snek_data.head in snek_data.body[1::]:
@@ -195,6 +197,7 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 		if snek_data.head in wall.cords:
 			if snek_data.shield == True:
 				snek_data.shield = False
+				#will overlap with food and power?
 				wall = game_objects.spawn_wall(snek_data, window_data)
 			else:
 				dead = True
@@ -220,20 +223,8 @@ def play(snek_data, colour_settings, window_data, difficulty_settings):
 					snek_data.shield = True
 				power_up.spawned = False
 
-		### RENDERS, MOVE TO A DIFFERENT FILE
-		# Rendering snake
-		for pos in snek_data.body:
-			pygame.draw.rect(window_data.window, colour_settings.snek_colour, pygame.Rect(pos[0], pos[1], snek_data.block_size, snek_data.block_size))
-
-		# Rendering snack
-		pygame.draw.rect(window_data.window, colour_settings.food_colour, pygame.Rect(snack.cords[0], snack.cords[1], snack.size, snack.size))
-
-		# Rendering power_up
-		pygame.draw.rect(window_data.window, colour_settings.power_up_colour, pygame.Rect(power_up.cords[0], power_up.cords[1], power_up.size, power_up.size))
-
-		# Rendering wall
-		for pos in wall.cords:
-			pygame.draw.rect(window_data.window, colour_settings.wall_colour, pygame.Rect((pos[0], pos[1]), (wall.size, wall.size)))
+		#render game
+		render.render(snek_data, window_data, colour_settings, wall, snack, power_up)
 
 		# Breaks the loops and shows end screen when pressed
 		if exit_button.draw(window_data.window):

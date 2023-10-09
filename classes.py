@@ -1,3 +1,4 @@
+from typing import Any
 import pygame
 
 # Create a dropdown menu with multiple choices
@@ -185,21 +186,18 @@ class wall_struct():
 # Create snacks
 class snack_struct():
 
-	def __init__(self, snack_cords, size, spawned, wall):
+	def __init__(self, snack_cords, size, spawned):
 
 		self.cords = snack_cords
 		self.size = size
 		self.spawned = spawned
-		self.wall = wall
 
 # Create power ups
 class power_up_struct():
 
-	def __init__(self, power_up_cords, size, spawned, wall, power):
+	def __init__(self, power_up_cords, size, spawned, power_type):
 
 		self.cords = power_up_cords
 		self.size = size
 		self.spawned = spawned
-		self.wall = wall
-		self.power_type = power
-
+		self.power_type = power_type
