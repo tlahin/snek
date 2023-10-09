@@ -10,7 +10,7 @@ Purpose of the project personally is to learn more python, pygame library and th
 	pygame (version?)
 
 # Usage
-To launch the game, go to the root of the directory and type
+	To launch the game, go to the root of the directory and type
 	`python main.py`
 
 # Working on:
@@ -20,11 +20,12 @@ To launch the game, go to the root of the directory and type
 
 # Todo:
 
-	- make sure power ups dont over lap with snacks and otherway around
+	- Make sure game objects don't overlap with eachother
 	- In options menu, add emojis/cooler text for difficulty dropdown
 	- Powerups such as speed/slow or immunity
-	- AI to play the game itself
-	- 'Tron' mode against AI snek
+	- Graphical effect for the snek
+	- AI to play the game itself?
+	- 'Tron' mode against AI snek?
 
 # Controls:
 
