@@ -1,4 +1,4 @@
-from typing import Any
+
 import pygame
 
 # Create a dropdown menu with multiple choices
