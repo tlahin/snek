@@ -10,8 +10,8 @@ Purpose of the project personally is to learn more python, pygame library and th
 	pygame (version?)
 
 # Usage
-	To launch the game, go to the root of the directory and type
-	`python main.py`
+	
+	Use the start script "start.sh" to launch the app
 
 # Working on:
 
